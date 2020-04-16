@@ -77,6 +77,8 @@ export default {
    * @see https://nuxtjs.org/api/configuration-generate/
    */
   generate: {
+    dir: 'tedx-dist',
+    devtools: false
   },
   /**
    * @description Define the dist directory for your Nuxt.js application
