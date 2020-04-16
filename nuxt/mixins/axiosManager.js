@@ -1,4 +1,4 @@
-import ENVs from '@/constants'
+import { ENVs } from '@/constants'
 import { mapMutations } from 'vuex'
 
 export default {

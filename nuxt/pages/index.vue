@@ -28,7 +28,6 @@ export default {
   },
   mounted() {
     Promise.all([
-      this.AXIOS_getMenuVoices(),
       this.AXIOS_getPages(),
       this.AXIOS_getPosts()
     ]).then( () => (this.spinner = false) )

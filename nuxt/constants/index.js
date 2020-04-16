@@ -1,4 +1,4 @@
-export default {
+const ENVs = {
   NETSONS: {
     protocol: 'http',
     host: 'develop.tedxschio.com',
@@ -53,3 +53,6 @@ export default {
     },
   },
 }
+
+const EMPTY_VALUE = '--'
+export { ENVs, EMPTY_VALUE }
