@@ -27,3 +27,12 @@ add_action( 'rest_api_init', function () {
 });
 
 add_filter('upload_mimes', 'add_file_types_to_uploads');
+
+/**
+ * @description Enable CORS on JSON API Wordpress.
+ * @see https://stackoverflow.com/a/29201101
+ */
+function add_cors_http_header(){
+  header("Access-Control-Allow-Origin: *");
+}
+add_action('init','add_cors_http_header');
