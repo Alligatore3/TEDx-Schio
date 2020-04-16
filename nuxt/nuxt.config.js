@@ -88,11 +88,6 @@ export default {
     devtools: false
   },
   /**
-   * @description Define the dist directory for your Nuxt.js application
-   * @see https://nuxtjs.org/api/configuration-builddir/
-   */
-  buildDir: 'tedx-dist',
-  /**
    * @description This can be useful if you need to serve Nuxt as a
    * different context root, from within a bigger Web site.
    * @see https://nuxtjs.org/api/configuration-router/#base
