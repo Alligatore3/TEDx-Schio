@@ -1,12 +1,14 @@
 $white-color: #FFF;
-$wine-color: #5E2129;
-$wine-color-RGB: "94,33,41";
+$ted-red: #ff2b06;
+$ted-grey: #727272;
+$ted-white: #FFF;
+$ted-light-grey: #f6f6f6;
+$ted-dark-black: #121212;
 
 /**
  @description We can share vars between JS and SCSS like this.
  Thanks Hoppus.
  @see https://stackoverflow.com/a/57641882
 */
-:export {
-  wineRGB: $wine-color-RGB
-}
+//:export {
+//}
