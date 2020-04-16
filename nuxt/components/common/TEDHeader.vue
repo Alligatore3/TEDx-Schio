@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container is-relative">
     <nav class="navbar my-1" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <n-link class="navbar-item" to="/">
@@ -62,27 +62,29 @@
 
 <style lang="scss" scoped>
   .navbar-item {
-    &:hover {
-      &:after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background-color: $ted-red;
-        height: 2px;
-      }
-    }
-
-    a {
-      color: $ted-dark-black
-    }
-
     figure {
       max-width: 200px;
 
       img {
         max-height: none;
+      }
+    }
+
+    &.has-text-weight-medium {
+      &:hover {
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          background-color: $ted-red;
+          height: 2px;
+        }
+      }
+
+      a {
+        color: $ted-dark-black
       }
     }
   }
