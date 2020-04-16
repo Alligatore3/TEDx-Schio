@@ -92,5 +92,5 @@ sw.*
 
 
 # WP
-wordpress/*
+wordpress/**/*
 !wordpress/wp-content/themes/TEDx Schio

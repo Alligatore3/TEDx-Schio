@@ -28,6 +28,9 @@ add_action( 'rest_api_init', function () {
 
 add_filter('upload_mimes', 'add_file_types_to_uploads');
 
+include_once('custom/post-types.php');
+include_once('custom/categories.php');
+
 /**
  * @description Enable CORS on JSON API Wordpress.
  * @see https://stackoverflow.com/a/29201101
