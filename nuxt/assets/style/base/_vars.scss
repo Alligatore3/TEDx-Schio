@@ -1,0 +1,12 @@
+$white-color: #FFF;
+$wine-color: #5E2129;
+$wine-color-RGB: "94,33,41";
+
+/**
+ @description We can share vars between JS and SCSS like this.
+ Thanks Hoppus.
+ @see https://stackoverflow.com/a/57641882
+*/
+:export {
+  wineRGB: $wine-color-RGB
+}

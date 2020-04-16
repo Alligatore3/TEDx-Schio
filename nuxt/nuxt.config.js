@@ -34,7 +34,17 @@ export default {
   ** Global CSS
   */
   css: [
+    '@/assets/style/styles.scss',
   ],
+  /**
+   * @description Share variables, mixins, functions across all style files (no @import needed)
+   * @see https://github.com/nuxt-community/style-resources-module#setup
+   */
+  styleResources: {
+    scss: [
+      '@/assets/style/base/_vars.scss',
+    ],
+  },
   /*
   ** Plugins to load before mounting the App
   */
@@ -52,6 +62,7 @@ export default {
     // Doc: https://github.com/nuxt-community/modules/tree/master/packages/bulma
     '@nuxtjs/bulma',
     '@nuxtjs/axios',
+    '@nuxtjs/style-resources',
   ],
   /**
    * @see https://axios.nuxtjs.org/setup.html#install
