@@ -3,32 +3,30 @@ import { mapMutations } from 'vuex'
 
 export default {
   methods: {
-    ...mapMutations('application', ['SET_MENU', 'SET_PAGES', 'SET_POSTS']),
+    ...mapMutations('application', ['SET_MENU', 'PUSH_A_PAGE', 'SET_CONTEXT_LOADING']),
     /**
      * @description This fetch from API the menu voices and sets in VUEX
      * We map the response to avoid 1 call for fetching HOMEPAGE ID
      * but at the same time we filter the menuvoice.
      */
     async AXIOS_getMenuVoices() {
-      let menuVoices = await this.$axios.$get(`${ ENVs.MAMP.getFullAPIPath() }/menu`)
-      menuVoices = menuVoices.map(voice => ({
-        ...voice,
-        showInMenu: voice.title !== 'HOMEPAGE'
-      }))
+      this.SET_CONTEXT_LOADING({ context: 'menu', isLoading: true })
+      const menuVoices = await this.$axios.$get(`${ ENVs.MAMP.getFullAPIPath() }/menu`)
 
       this.SET_MENU(menuVoices)
+      this.SET_CONTEXT_LOADING({ context: 'menu', isLoading: false })
     },
-    async AXIOS_getPages() {
-      const pages = await this.$axios.$get(`${ ENVs.MAMP.getFullAPIPath() }/pages`)
+    /**
+     * @see https://wordpress.stackexchange.com/a/284302
+     * @param {String} slug
+     * @return {Promise<void>}
+     */
+    async AXIOS_getPageBySlug(slug) {
+      this.SET_CONTEXT_LOADING({ context: 'page', isLoading: true })
+      const page = await this.$axios.$get(`${ ENVs.MAMP.getFullAPIPath() }/pages?slug=${slug}`)
 
-      this.SET_PAGES(pages)
-      return pages
-    },
-    async AXIOS_getPosts() {
-      const posts = await this.$axios.$get(`${ ENVs.MAMP.getFullAPIPath() }/posts`)
-
-      this.SET_POSTS(posts)
-      return posts
+      this.PUSH_A_PAGE(page[0])
+      this.SET_CONTEXT_LOADING({ context: 'page', isLoading: false })
     },
   }
 }

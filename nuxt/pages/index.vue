@@ -1,18 +1,7 @@
 <template>
-  <div class="container">
-    <div v-if="spinner" class="spinner">
-      <button class="mt-2 button is-fullwidth is-loading"></button>
-    </div>
-    <div v-else>
-      <h1 class="title mt-2 is-2">Menu: </h1>
-      <pre>{{ getMenu }}</pre>
-
-      <h1 class="title mt-2 is-2">Pages: </h1>
-      <pre>{{ getPages }}</pre>
-
-      <h1 class="title mt-2 is-2">Posts: </h1>
-      <pre>{{ getPosts }}</pre>
-    </div>
+  <div>
+    <Hero :image="homepageACFMetaBy('full_width_image')" />
+    {{ getPageBySlugFromVUEX('homepage')  }}
   </div>
 </template>
 
@@ -22,15 +11,20 @@
 
 export default {
   mixins:[axiosManager],
-  data: () => ({ spinner: true }),
+  components: {
+    Hero: () => import('@/components/common/Hero')
+  },
   computed: {
-    ...mapGetters('application', ['getMenu', 'getPages', 'getPosts'])
+    ...mapGetters('application', ['getPageBySlugFromVUEX']),
+  },
+  methods: {
+    homepageACFMetaBy(key) {
+      return this.getPageBySlugFromVUEX('homepage') &&
+        this.getPageBySlugFromVUEX('homepage').acf[key]
+    }
   },
   mounted() {
-    Promise.all([
-      this.AXIOS_getPages(),
-      this.AXIOS_getPosts()
-    ]).then( () => (this.spinner = false) )
+    !this.getPageBySlugFromVUEX('homepage') && this.AXIOS_getPageBySlug('homepage')
   }
 }
 </script>

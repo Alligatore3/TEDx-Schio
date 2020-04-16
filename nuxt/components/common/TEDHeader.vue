@@ -1,6 +1,10 @@
 <template>
   <div class="container is-relative">
-    <nav class="navbar my-1" role="navigation" aria-label="main navigation">
+    <button
+      v-if="isContextLoading('menu')"
+      class="scoped-spinner button is-loading is-fullwidth">
+    </button>
+    <nav v-else class="navbar my-1" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <n-link class="navbar-item" to="/">
           <figure class="image">
@@ -40,7 +44,7 @@
     name: "TEDHeader",
     mixins:[axiosManager],
     computed: {
-      ...mapGetters('application', ['getMenu']),
+      ...mapGetters('application', ['getMenu', 'isContextLoading']),
       computedMenuVoices() {
         return this.getMenu.map(
           (voice, index) => ({
@@ -61,6 +65,19 @@
 </script>
 
 <style lang="scss" scoped>
+  .scoped-spinner {
+    position: absolute;
+    z-index: 100;
+    border: none;
+    top: 0;
+    left: 0;
+
+    &:after {
+      border-left-color: $ted-red;
+      border-bottom-color: $ted-red;
+    }
+  }
+
   .navbar-item {
     figure {
       max-width: 200px;
