@@ -10,7 +10,7 @@ export default {
      * but at the same time we filter the menuvoice.
      */
     async AXIOS_getMenuVoices() {
-      let menuVoices = await this.$axios.$get(`${ ENVs.NETSONS.getFullPath() }/menu`)
+      let menuVoices = await this.$axios.$get(`${ ENVs.NETSONS.getFullAPIPath() }/menu`)
       menuVoices = menuVoices.map(voice => ({
         ...voice,
         showInMenu: voice.title !== 'HOMEPAGE'
@@ -19,13 +19,13 @@ export default {
       this.SET_MENU(menuVoices)
     },
     async AXIOS_getPages() {
-      const pages = await this.$axios.$get(`${ ENVs.NETSONS.getFullPath() }/pages`)
+      const pages = await this.$axios.$get(`${ ENVs.NETSONS.getFullAPIPath() }/pages`)
 
       this.SET_PAGES(pages)
       return pages
     },
     async AXIOS_getPosts() {
-      const posts = await this.$axios.$get(`${ ENVs.NETSONS.getFullPath() }/posts`)
+      const posts = await this.$axios.$get(`${ ENVs.NETSONS.getFullAPIPath() }/posts`)
 
       this.SET_POSTS(posts)
       return posts

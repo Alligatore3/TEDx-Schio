@@ -9,14 +9,21 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: process.env.npm_package_name || '',
+    title: ENVs.NETSONS.SEO.title,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { hid: 'description', name: 'description', content: ENVs.NETSONS.SEO.description },
+
+      { hid: 'og:title', name: 'og:title', content: ENVs.NETSONS.SEO.title },
+      { hid: 'og:description', name: 'og:description', content: ENVs.NETSONS.SEO.description },
+      { hid: 'og:url', name: 'og:url', content: ENVs.NETSONS.getFullPath() },
+
+      { hid: 'twitter:title', name: 'twitter:title', content: ENVs.NETSONS.SEO.title },
+      { hid: 'twitter:description', name: 'twitter:description', content: ENVs.NETSONS.SEO.description },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/png', href: '/favicon.png' }
     ]
   },
   /*
