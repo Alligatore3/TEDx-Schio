@@ -4,7 +4,8 @@
 
 <script>
   export default {
-    name: "TEDxPage"
+    name: "TEDxPage",
+    layout: 'custom'
   }
 </script>
 

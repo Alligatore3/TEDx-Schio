@@ -75,6 +75,7 @@
     }
 
     &.has-text-weight-medium {
+      .nuxt-link-active,
       &:hover {
         &:after {
           content: '';
