@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <Hero v-if="getPageBySlugFromVUEX('homepage')" :image="homepageACFMetaBy('full_width_image')" />
+  <div v-if="getPageBySlugFromVUEX('homepage')">
+    <Hero :image="homepageACFMetaBy('full_width_image')" />
     <div class="container">
       <div v-html="getPageBySlugFromVUEX('homepage').content.rendered"></div>
       <Announcer />

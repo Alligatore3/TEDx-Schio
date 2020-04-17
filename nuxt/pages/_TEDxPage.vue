@@ -4,7 +4,7 @@
 
 <script>
   export default {
-    name: "_page"
+    name: "TEDxPage"
   }
 </script>
 
