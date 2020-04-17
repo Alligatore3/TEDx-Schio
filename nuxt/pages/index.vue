@@ -1,6 +1,7 @@
 <template>
   <div>
-    <Hero :image="homepageACFMetaBy('full_width_image')" />
+    <Hero v-if="getPageBySlugFromVUEX('homepage')" :image="homepageACFMetaBy('full_width_image')" />
+    <Announcer />
     {{ getPageBySlugFromVUEX('homepage')  }}
   </div>
 </template>
@@ -12,7 +13,8 @@
 export default {
   mixins:[axiosManager],
   components: {
-    Hero: () => import('@/components/common/Hero')
+    Hero: () => import('@/components/common/Hero'),
+    Announcer: () => import('@/components/Announcer'),
   },
   computed: {
     ...mapGetters('application', ['getPageBySlugFromVUEX']),

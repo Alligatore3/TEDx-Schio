@@ -26,7 +26,12 @@ add_action( 'rest_api_init', function () {
   );
 });
 
-add_filter('upload_mimes', 'add_file_types_to_uploads');
+/**
+ * @description Themes have to declare their support for post thumbnails before the interface for assigning
+ * these images will appear on the Edit Post and Edit Page screens
+ * @see https://codex.wordpress.org/Post_Thumbnails#Enabling_Support_for_Post_Thumbnails
+ */
+add_theme_support( 'post-thumbnails' );
 
 include_once('custom/post-types.php');
 include_once('custom/categories.php');

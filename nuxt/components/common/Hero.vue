@@ -1,7 +1,7 @@
 <template>
   <section class="hero is-large">
     <div class="hero-body is-relative over-hidden">
-      <img class="hero-image" v-if="image" :src="image" alt="Banner Image" />
+      <img class="hero-image" :src="image" alt="Banner Image" />
       <div class="container"></div>
     </div>
   </section>
