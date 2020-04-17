@@ -1,5 +1,5 @@
 <template>
-  <div class="is-relative">
+  <div class="is-relative my-6">
     <ButtonSpinner v-if="isContextLoading('announcers')" />
     <div v-else>
       <h3 class="title is-3 ted-red has-text-centered">

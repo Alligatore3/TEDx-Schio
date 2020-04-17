@@ -13,6 +13,7 @@ export const state = () => ({
     menu: true,
     page: true,
     announcers: true,
+    speakers: true,
   }
 })
 
