@@ -34,9 +34,3 @@ export default {
   }
 }
 </script>
-
-<style>
-  .mt-2 {
-    margin-top: 2rem;
-  }
-</style>
