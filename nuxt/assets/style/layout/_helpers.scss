@@ -84,8 +84,8 @@
 }
 
 .mx-auto {
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .p-0{
@@ -113,6 +113,18 @@
   color: $ted-red;
 }
 
+.ted-white {
+  color: $ted-white;
+}
+
 .white-bg {
   background-color: $ted-white;
+}
+
+.transparent-bg {
+  background-color: transparent !important;
+}
+
+.black-bg {
+  background-color: $ted-dark-black;
 }
