@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapMutations } from 'vuex'
   import axiosManager from "@/mixins/axiosManager";
 
   export default {
@@ -42,9 +42,16 @@
         return { name, excerpt, image_url }
       }
     },
+    methods: {
+      ...mapMutations('application', ['PUSH_AN_ANNOUNCER'])
+    },
     mounted() {
       !this.getAnnouncerByYearFromVUEX(this.year) &&
-        this.AXIOS_getAnnouncerByYear(this.year)
+        this.AXIOS_getEntityByYear({
+          entity: 'announcers',
+          year: this.year,
+          mutation: this.PUSH_AN_ANNOUNCER
+        })
     }
   }
 </script>

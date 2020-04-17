@@ -7,7 +7,6 @@ export default {
       'SET_MENU',
       'PUSH_A_PAGE',
       'SET_CATEGORIES_BY',
-      'PUSH_AN_ANNOUNCER',
       'SET_CONTEXT_LOADING'
     ]),
     /**
@@ -44,19 +43,27 @@ export default {
       this.SET_CATEGORIES_BY({ key: taxonomy, categories } )
       return categories
     },
-    async AXIOS_getAnnouncerByYear(year) {
-      this.SET_CONTEXT_LOADING({ context: 'announcers', isLoading: true })
-      const announcersCategories = await this.AXIOS_getAllCategoriesByTaxonomy('announcers-category')
+    /**
+     * @description Given an entity we first have to fetch for categories of that
+     * entity, find the ID of category with same 'year' value; Finally ask for posts with
+     * that categoryID and call relative mutation
+     * @param {String} entity Entity to look for...like 'speakers', 'announcers'
+     * @param {Number} year
+     * @param {Function} mutation Reference of VUEX mutation
+     */
+    async AXIOS_getEntityByYear({ entity, year, mutation }) {
+      this.SET_CONTEXT_LOADING({ context: entity, isLoading: true })
+      const entityCategories = await this.AXIOS_getAllCategoriesByTaxonomy(`${entity}-category`)
 
-      const categoryByYear = announcersCategories.find(
+      const categoryByYear = entityCategories.find(
         category => category.slug === year.toString()
       ) || false
       const categoryID = categoryByYear && categoryByYear.id
 
-      const announcer = await this.$axios.$get(`${ ENVs.MAMP.getFullAPIPath() }/announcers?announcers-category=${categoryID}`)
+      const entityFilteredByCategoryID = await this.$axios.$get(`${ ENVs.MAMP.getFullAPIPath() }/${entity}?${entity}-category=${categoryID}`)
 
-      this.PUSH_AN_ANNOUNCER(announcer)
-      this.SET_CONTEXT_LOADING({ context: 'announcers', isLoading: false })
+      mutation(entityFilteredByCategoryID)
+      this.SET_CONTEXT_LOADING({ context: entity, isLoading: false })
     },
   }
 }

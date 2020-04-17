@@ -1,7 +1,10 @@
 export const state = () => ({
   menu: [],
   pages: [],
-  categories: [],
+  speakers: {
+    categories: [],
+    posts: [],
+  },
   announcers: {
     categories: [],
     posts: [],
@@ -13,21 +16,36 @@ export const state = () => ({
   }
 })
 
+/**
+ * @description Helper to avoid DRY pattern.
+ * @return {Number | Boolean}
+ */
+const getCategoryIDFromByYear = ({ state, from, year }) => {
+  const category = state[from].categories.find(
+    category => category.slug === year.toString()
+  ) || false
+
+  return category && category.id
+}
+
 export const getters = {
   getMenu: state => state.menu,
-  getPages: state => state.pages,
   /**
    * @description Due to WP API we can't access to the category by simply '2019'
    * We have to find the ID first and then return the value.
    */
   getAnnouncerByYearFromVUEX: state => year => {
-    const category = state.announcers.categories.find(
-      category => category.slug === year.toString()
-    ) || false
-    const categoryID = category && category.id
+    const categoryID = getCategoryIDFromByYear({ state, from: 'announcers', year })
 
     return categoryID && state.announcers.posts.find(
       announcer => announcer['announcers-category'][0] === categoryID
+    )
+  },
+  getSpeakersByYearFromVUEX: state => year => {
+    const categoryID = getCategoryIDFromByYear({ state, from: 'speakers', year })
+
+    return categoryID && state.speakers.posts.filter(
+      speaker => speaker['speakers-category'][0] === categoryID
     )
   },
   getPageBySlugFromVUEX: state => slug => state.pages.find(
@@ -49,6 +67,7 @@ const STATE_HANDLER = ({ state, key, identityToUpdate }) => {
 
 export const mutations = {
   SET_MENU: (state, menu) => (state.menu = menu),
+  SET_SPEAKERS: (state, speakers) => (state.speakers.posts = speakers),
   PUSH_A_PAGE: (state, pageToPush) => STATE_HANDLER({state, key: 'pages', identityToUpdate: pageToPush}),
   /**
    * @todo
