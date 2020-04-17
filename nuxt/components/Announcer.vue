@@ -3,7 +3,7 @@
     <ButtonSpinner v-if="isContextLoading('announcers')" />
     <div v-else>
       <h3 class="title is-3 ted-red has-text-centered">
-        La presentatrice di TEDxSchio {{ this.currentYear }}
+        La presentatrice di TEDxSchio {{ this.year }}
       </h3>
       <div class="mt-1 columns is-multiline">
         <div class="column">
@@ -26,20 +26,25 @@
   export default {
     name: "Announcer",
     mixins: [axiosManager],
-    data: () => ({ currentYear: 2019 }),
+    props: {
+      year: {
+        type: Number,
+        default: new Date().getFullYear()
+      }
+    },
     components: {
       ButtonSpinner: () => import('@/components/common/ButtonSpinner')
     },
     computed: {
       ...mapGetters('application', ['getAnnouncerByYearFromVUEX', 'isContextLoading']),
       computedAnnouncer() {
-        const { title: { rendered: name}, content: { rendered: excerpt }, image_url } = this.getAnnouncerByYearFromVUEX(this.currentYear)
+        const { title: { rendered: name}, content: { rendered: excerpt }, image_url } = this.getAnnouncerByYearFromVUEX(this.year)
         return { name, excerpt, image_url }
       }
     },
     mounted() {
-      !this.getAnnouncerByYearFromVUEX(this.currentYear) &&
-        this.AXIOS_getAnnouncerByYear(this.currentYear)
+      !this.getAnnouncerByYearFromVUEX(this.year) &&
+        this.AXIOS_getAnnouncerByYear(this.year)
     }
   }
 </script>

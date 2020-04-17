@@ -3,7 +3,8 @@
     <Hero :image="homepageACFMetaBy('full_width_image')" />
     <div class="container">
       <div v-html="getPageBySlugFromVUEX('homepage').content.rendered"></div>
-      <Announcer />
+      <Announcer :year="2019" />
+      <SpeakersGrid :year="2019" />
     </div>
 
     {{ getPageBySlugFromVUEX('homepage')  }}
@@ -19,6 +20,7 @@ export default {
   components: {
     Hero: () => import('@/components/common/Hero'),
     Announcer: () => import('@/components/Announcer'),
+    SpeakersGrid: () => import('@/components/common/SpeakersGrid'),
   },
   computed: {
     ...mapGetters('application', ['getPageBySlugFromVUEX']),
