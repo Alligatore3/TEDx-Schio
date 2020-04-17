@@ -6,8 +6,6 @@
       <Announcer :year="2019" />
       <SpeakersGrid :year="2019" />
     </div>
-
-    {{ getPageBySlugFromVUEX('homepage')  }}
   </div>
 </template>
 
@@ -20,7 +18,7 @@ export default {
   components: {
     Hero: () => import('@/components/common/Hero'),
     Announcer: () => import('@/components/Announcer'),
-    SpeakersGrid: () => import('@/components/common/SpeakersGrid'),
+    SpeakersGrid: () => import('@/components/common/SpeakersGrid/index'),
   },
   computed: {
     ...mapGetters('application', ['getPageBySlugFromVUEX']),
