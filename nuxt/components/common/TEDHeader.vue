@@ -22,7 +22,7 @@
             v-for="voice in computedMenuVoices"
             :key="voice.id"
             class="navbar-item mx-1 has-text-weight-medium pointer">
-            <n-link :to="voice.title">
+            <n-link :to="voice.title.toLowerCase()">
               {{ voice.title }}
             </n-link>
           </div>
