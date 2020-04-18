@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
+  import { mapGetters, mapMutations } from 'vuex'
   import axiosManager from "@/mixins/axiosManager";
 
 export default {
@@ -24,13 +24,15 @@ export default {
     ...mapGetters('application', ['getCurrentEdition', 'getPageBySlugFromVUEX']),
   },
   methods: {
+    ...mapMutations('application', ['PUSH_A_PAGE']),
     homepageACFMetaBy(key) {
       return this.getPageBySlugFromVUEX('homepage') &&
         this.getPageBySlugFromVUEX('homepage').acf[key]
     }
   },
   mounted() {
-    !this.getPageBySlugFromVUEX('homepage') && this.AXIOS_getPageBySlug('homepage')
+    !this.getPageBySlugFromVUEX('homepage') &&
+      this.AXIOS_getEntityBySlug({ entity: 'pages', slug: 'homepage', mutation: this.PUSH_A_PAGE })
   }
 }
 </script>

@@ -1,21 +1,7 @@
 <template>
   <div class="is-relative my-6">
     <ButtonSpinner v-if="isContextLoading('announcers')" />
-    <div v-else>
-      <h3 class="title is-3 ted-red has-text-centered">
-        La presentatrice di TEDxSchio {{ this.year }}
-      </h3>
-      <div class="mt-1 columns is-multiline">
-        <div class="column">
-          <figure class="image">
-            <img :src="computedAnnouncer.image_url" :alt="computedAnnouncer.name">
-          </figure>
-        </div>
-        <div class="column">
-          <div v-html="computedAnnouncer.excerpt"></div>
-        </div>
-      </div>
-    </div>
+    <SubjectBlock v-else :subject="computedAnnouncer" />
   </div>
 </template>
 
@@ -33,13 +19,18 @@
       }
     },
     components: {
-      ButtonSpinner: () => import('@/components/common/ButtonSpinner')
+      ButtonSpinner: () => import('@/components/common/ButtonSpinner'),
+      SubjectBlock: () => import('@/components/common/SubjectBlock'),
     },
     computed: {
       ...mapGetters('application', ['getAnnouncerByYearFromVUEX', 'isContextLoading']),
       computedAnnouncer() {
-        const { title: { rendered: name}, content: { rendered: excerpt }, image_url } = this.getAnnouncerByYearFromVUEX(this.year)
-        return { name, excerpt, image_url }
+        const { content: { rendered: excerpt }, image_url } = this.getAnnouncerByYearFromVUEX(this.year)
+        return {
+          title: `La presentatrice di TEDxSchio ${ this.year }`,
+          excerpt,
+          image_url,
+        }
       }
     },
     methods: {

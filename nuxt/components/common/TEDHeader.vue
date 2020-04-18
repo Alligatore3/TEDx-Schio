@@ -22,7 +22,7 @@
             v-for="voice in computedMenuVoices"
             :key="voice.id"
             class="navbar-item mx-1 has-text-weight-medium pointer">
-            <n-link :to="voice.title.toLowerCase()">
+            <n-link :to="`/${voice.title.toLowerCase()}`">
               {{ voice.title }}
             </n-link>
           </div>
@@ -32,7 +32,7 @@
   </div>
 </template>
 
-<script>
+<script>``
   import { EMPTY_VALUE } from '@/constants'
   import { mapGetters } from 'vuex'
   import axiosManager from "@/mixins/axiosManager";

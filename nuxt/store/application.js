@@ -12,7 +12,7 @@ export const state = () => ({
   },
   loaders: {
     menu: true,
-    page: true,
+    pages: true,
     announcers: true,
     speakers: true,
   }
@@ -24,7 +24,6 @@ export const state = () => ({
  */
 const getCategoryIDFromByYear = ({ state, from, year }) => {
   const category = searchFor({ where: state[from].categories, key: 'slug', what: year.toString() })
-
   return category && category.id
 }
 
@@ -63,22 +62,11 @@ export const getters = {
   isContextLoading: state => context => state.loaders[context],
 }
 
-const STATE_HANDLER = ({ state, key, identityToUpdate }) => {
-  state[key] = !state[key].length
-    ? state[key].concat(identityToUpdate)
-    : state[key].map(
-      identity => {
-        return identity.id === identityToUpdate.id
-          ? identityToUpdate : identity
-      }
-    )
-}
-
 export const mutations = {
   SET_MENU: (state, menu) => (state.menu = menu),
   SET_SPEAKERS: (state, speakers) => (state.speakers.posts = speakers),
-  // PUSH_A_PAGE: (state, pageToPush) => STATE_HANDLER({state, key: 'pages', identityToUpdate: pageToPush}),
   PUSH_A_PAGE: (state, pageToPush) => (state.pages = state.pages.concat(pageToPush)),
+  PUSH_A_SPEAKER: (state, speakerToPush) => (state.speakers.posts = state.speakers.posts.concat(speakerToPush)),
   /**
    * @todo
    * @description It's not clear but due to WP API category slug

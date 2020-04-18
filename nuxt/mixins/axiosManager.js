@@ -5,7 +5,6 @@ export default {
   methods: {
     ...mapMutations('application', [
       'SET_MENU',
-      'PUSH_A_PAGE',
       'SET_CATEGORIES_BY',
       'SET_CONTEXT_LOADING'
     ]),
@@ -23,19 +22,20 @@ export default {
     },
     /**
      * @see https://wordpress.stackexchange.com/a/284302
-     * @param {String} slug
+     * @param {String} entity 'pages' or 'speakers'.
+     * @param {String} slug Speaker slug 'dino-lanzaretti' or page slug.
      * @return {Promise<void>}
      */
-    async AXIOS_getPageBySlug(slug) {
-      this.SET_CONTEXT_LOADING({ context: 'page', isLoading: true })
-      const page = await this.$axios.$get(`${ ENVs.MAMP.getFullAPIPath() }/pages?slug=${slug}`)
+    async AXIOS_getEntityBySlug({ entity, slug, mutation }) {
+      this.SET_CONTEXT_LOADING({ context: entity, isLoading: true })
+      const entityResponse = await this.$axios.$get(`${ ENVs.MAMP.getFullAPIPath() }/${entity}?slug=${slug}`)
 
-      if(!page[0]) {
-        throw new Error('Pagina inesistente')
+      if(!entityResponse[0]) {
+        throw new Error(`${entity} not found`)
       } else {
-        this.PUSH_A_PAGE(page[0])
+        mutation(entityResponse[0])
       }
-      this.SET_CONTEXT_LOADING({ context: 'page', isLoading: false })
+      this.SET_CONTEXT_LOADING({ context: entity, isLoading: false })
     },
     /**
      * @see https://developer.wordpress.org/rest-api/reference/categories/#example-request

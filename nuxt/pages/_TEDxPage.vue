@@ -9,7 +9,7 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapMutations } from 'vuex'
   import axiosManager from "@/mixins/axiosManager";
   import { EMPTY_VALUE } from "@/constants";
 
@@ -33,7 +33,6 @@
           title: this.pageInURL
         }
       },
-
       /**
        * @description To pass props dynamically, you can add the v-bind directive to your
        * dynamic component and pass an object containing your prop names and values.
@@ -55,8 +54,12 @@
         }
       }
     },
+    methods: {
+      ...mapMutations('application', ['PUSH_A_PAGE']),
+    },
     mounted() {
-      !this.getPageBySlugFromVUEX(this.pageInURL) && this.AXIOS_getPageBySlug(this.pageInURL)
+      !this.getPageBySlugFromVUEX(this.pageInURL) &&
+        this.AXIOS_getEntityBySlug({ entity: 'pages', slug: this.pageInURL, mutation: this.PUSH_A_PAGE })
     }
   }
 </script>
