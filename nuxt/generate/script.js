@@ -13,6 +13,10 @@ export const generateConfig = () => ({
   devtools: false,
   async routes() {
     const { data: menuVoices } = await axios.get(`${ ENVs.MAMP.getFullAPIPath() }/menu`)
-    return menuVoices.map( voice => voice.title.toLowerCase() )
+    const { data: allSpeakers } = await axios.get(`${ ENVs.MAMP.getFullAPIPath() }/speakers`)
+
+    return menuVoices.map( voice => voice.title.toLowerCase() ).concat(
+      allSpeakers.map( speaker => `speaker/${speaker.slug}`)
+    )
   }
 })
