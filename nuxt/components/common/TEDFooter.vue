@@ -21,7 +21,7 @@
                   :key="social.name"
                   v-for="social in socials"
                   class="column">
-                  <a itemprop="url" :href="social.url" target="_blank">
+                  <a itemprop="url" rel="noreferrer" :href="social.url" target="_blank">
                     <figure class="image mx-auto is-32x32">
                       <img :src="`icons/${social.name}.png`" :alt="social.name" />
                     </figure>
