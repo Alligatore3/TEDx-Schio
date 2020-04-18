@@ -7,13 +7,9 @@
     name: "bindToHTML",
     props: {
       html: {
-        type: String,
+        type: String | Boolean,
         default: ''
       }
     }
   }
 </script>
-
-<style scoped>
-
-</style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ButtonSpinner v-if="isContextLoading('speakers')" />
+    <ButtonSpinner v-if="!getSpeakersByYearFromVUEX(year)" />
     <div v-else class="speakers">
       <h1 class="title is-2 ted-red has-text-centered my-3">
         Gli Speaker di TEDxSchio {{ year }}
@@ -36,14 +36,15 @@
     computed: {
       ...mapGetters('application', ['isContextLoading', 'getSpeakersByYearFromVUEX']),
       computedSpeakers() {
-        return this.getSpeakersByYearFromVUEX(this.year).map(
-          speaker => ({
-            slug: speaker.slug,
-            image: speaker.image_url,
-            name: speaker.title.rendered,
-            description: speaker.acf.descrizione
-          })
-        )
+        return this.getSpeakersByYearFromVUEX(this.year) &&
+          this.getSpeakersByYearFromVUEX(this.year).map(
+            speaker => ({
+              slug: speaker.slug,
+              image: speaker.image_url,
+              name: speaker.title.rendered,
+              description: speaker.acf.descrizione
+            })
+          )
       }
     },
     methods: {

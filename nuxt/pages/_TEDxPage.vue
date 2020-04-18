@@ -11,7 +11,6 @@
 <script>
   import { mapGetters, mapMutations } from 'vuex'
   import axiosManager from "@/mixins/axiosManager";
-  import { EMPTY_VALUE } from "@/constants";
 
   export default {
     name: "TEDxPage",
@@ -45,7 +44,7 @@
 
           case 'contatti':
             const html = this.getPageBySlugFromVUEX(this.pageInURL) &&
-              this.getPageBySlugFromVUEX(this.pageInURL).content.rendered || EMPTY_VALUE
+              this.getPageBySlugFromVUEX(this.pageInURL).content.rendered
 
             return { instance: 'bindToHTML', props: { html } }
 
