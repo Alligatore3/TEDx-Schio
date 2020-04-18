@@ -23,12 +23,18 @@ export const state = () => ({
  * @return {Number | Boolean}
  */
 const getCategoryIDFromByYear = ({ state, from, year }) => {
-  const category = state[from].categories.find(
-    category => category.slug === year.toString()
-  ) || false
+  const category = searchFor({ where: state[from].categories, key: 'slug', what: year.toString() })
 
   return category && category.id
 }
+
+/**
+ * @description Utility to avoid DRY pattern.
+ * @return {Object | Boolean}
+ */
+const searchFor = ({ where, key, what }) => where.find(
+  item => item[key] === what
+) || false
 
 export const getters = {
   getMenu: state => state.menu,
@@ -52,9 +58,8 @@ export const getters = {
       speaker => speaker['speakers-category'][0] === categoryID
     )
   },
-  getPageBySlugFromVUEX: state => slug => state.pages.find(
-    page => page.slug === slug
-  ) || false,
+  getPageBySlugFromVUEX: state => slug => searchFor({ where: state.pages, key: 'slug', what: slug }),
+  getSpeakerBySlugFromVUEX: state => slug => searchFor({ where: state.speakers.posts, key: 'slug', what: slug }),
   isContextLoading: state => context => state.loaders[context],
 }
 
