@@ -1,4 +1,5 @@
 export const state = () => ({
+  TEDxEdition: 2019,
   menu: [],
   pages: [],
   speakers: {
@@ -31,6 +32,7 @@ const getCategoryIDFromByYear = ({ state, from, year }) => {
 
 export const getters = {
   getMenu: state => state.menu,
+  getCurrentEdition: state => state.TEDxEdition,
   /**
    * @description Due to WP API we can't access to the category by simply '2019'
    * We have to find the ID first and then return the value.

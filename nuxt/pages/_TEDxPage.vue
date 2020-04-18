@@ -7,12 +7,14 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
   export default {
     name: "TEDxPage",
     components: {
       SpeakersGrid: () => import('@/components/common/SpeakersGrid/index'),
     },
     computed: {
+      ...mapGetters('application', ['getCurrentEdition']),
       pageInURL() {
           return this.$route.params && this.$route.params.TEDxPage
       },
@@ -24,7 +26,7 @@
       dynamicComponent() {
         switch (this.pageInURL) {
           case 'speakers':
-            return { instance: 'SpeakersGrid', props: { year: 2019 } }
+            return { instance: 'SpeakersGrid', props: { year: this.getCurrentEdition } }
 
           default:
             return ''

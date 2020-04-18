@@ -3,8 +3,8 @@
     <Hero :image="homepageACFMetaBy('full_width_image')" />
     <div class="container">
       <div v-html="getPageBySlugFromVUEX('homepage').content.rendered"></div>
-      <Announcer :year="2019" />
-      <SpeakersGrid :year="2019" />
+      <Announcer :year="getCurrentEdition" />
+      <SpeakersGrid :year="getCurrentEdition" />
     </div>
   </div>
 </template>
@@ -21,7 +21,7 @@ export default {
     SpeakersGrid: () => import('@/components/common/SpeakersGrid/index'),
   },
   computed: {
-    ...mapGetters('application', ['getPageBySlugFromVUEX']),
+    ...mapGetters('application', ['getCurrentEdition', 'getPageBySlugFromVUEX']),
   },
   methods: {
     homepageACFMetaBy(key) {
