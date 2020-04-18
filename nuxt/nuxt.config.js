@@ -1,4 +1,5 @@
 import { ENVs } from './constants'
+import { generateConfig } from "./generate/script";
 
 export default {
   /**
@@ -94,10 +95,7 @@ export default {
    * to a static web application.
    * @see https://nuxtjs.org/api/configuration-generate/
    */
-  generate: {
-    dir: 'tedx-dist',
-    devtools: false
-  },
+  generate: generateConfig(),
   /**
    * @description This can be useful if you need to serve Nuxt as a
    * different context root, from within a bigger Web site.
