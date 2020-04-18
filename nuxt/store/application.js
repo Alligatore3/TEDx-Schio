@@ -32,6 +32,7 @@ const getCategoryIDFromByYear = ({ state, from, year }) => {
 
 export const getters = {
   getMenu: state => state.menu,
+  getPages: state => state.pages,
   getCurrentEdition: state => state.TEDxEdition,
   /**
    * @description Due to WP API we can't access to the category by simply '2019'
@@ -71,7 +72,8 @@ const STATE_HANDLER = ({ state, key, identityToUpdate }) => {
 export const mutations = {
   SET_MENU: (state, menu) => (state.menu = menu),
   SET_SPEAKERS: (state, speakers) => (state.speakers.posts = speakers),
-  PUSH_A_PAGE: (state, pageToPush) => STATE_HANDLER({state, key: 'pages', identityToUpdate: pageToPush}),
+  // PUSH_A_PAGE: (state, pageToPush) => STATE_HANDLER({state, key: 'pages', identityToUpdate: pageToPush}),
+  PUSH_A_PAGE: (state, pageToPush) => (state.pages = state.pages.concat(pageToPush)),
   /**
    * @todo
    * @description It's not clear but due to WP API category slug

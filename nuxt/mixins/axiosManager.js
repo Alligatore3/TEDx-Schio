@@ -30,7 +30,11 @@ export default {
       this.SET_CONTEXT_LOADING({ context: 'page', isLoading: true })
       const page = await this.$axios.$get(`${ ENVs.MAMP.getFullAPIPath() }/pages?slug=${slug}`)
 
-      this.PUSH_A_PAGE(page[0])
+      if(!page[0]) {
+        throw new Error('Pagina inesistente')
+      } else {
+        this.PUSH_A_PAGE(page[0])
+      }
       this.SET_CONTEXT_LOADING({ context: 'page', isLoading: false })
     },
     /**

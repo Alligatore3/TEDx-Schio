@@ -1,23 +1,39 @@
 <template>
   <div class="container">
-    <p>Dynamic</p>
-
-    <component :is="dynamicComponent.instance" v-bind="dynamicComponent.props" />
+    <ButtonSpinner v-if="isContextLoading('page')" />
+    <div class="my-2" v-else>
+      <Hero size="is-medium" :image="bannerInfo.image" :title="bannerInfo.title" />
+      <component :is="dynamicComponent.instance" v-bind="dynamicComponent.props" />
+    </div>
   </div>
 </template>
 
 <script>
   import { mapGetters } from 'vuex'
+  import axiosManager from "@/mixins/axiosManager";
+  import { EMPTY_VALUE } from "@/constants";
+
   export default {
     name: "TEDxPage",
+    mixins: [axiosManager],
     components: {
+      ButtonSpinner: () => import('@/components/common/ButtonSpinner'),
+      Hero: () => import('@/components/common/Hero'),
       SpeakersGrid: () => import('@/components/common/SpeakersGrid/index'),
+      bindToHTML: () => import('@/components/common/bindToHTML'),
     },
     computed: {
-      ...mapGetters('application', ['getCurrentEdition']),
+      ...mapGetters('application', ['getPages', 'isContextLoading', 'getCurrentEdition', 'getPageBySlugFromVUEX']),
       pageInURL() {
           return this.$route.params && this.$route.params.TEDxPage
       },
+      bannerInfo() {
+        return {
+          image: this.getPageBySlugFromVUEX(this.pageInURL) && this.getPageBySlugFromVUEX(this.pageInURL).acf.banner_image,
+          title: this.pageInURL
+        }
+      },
+
       /**
        * @description To pass props dynamically, you can add the v-bind directive to your
        * dynamic component and pass an object containing your prop names and values.
@@ -28,10 +44,19 @@
           case 'speakers':
             return { instance: 'SpeakersGrid', props: { year: this.getCurrentEdition } }
 
+          case 'contatti':
+            const html = this.getPageBySlugFromVUEX(this.pageInURL) &&
+              this.getPageBySlugFromVUEX(this.pageInURL).content.rendered || EMPTY_VALUE
+
+            return { instance: 'bindToHTML', props: { html } }
+
           default:
             return ''
         }
       }
+    },
+    mounted() {
+      !this.getPageBySlugFromVUEX(this.pageInURL) && this.AXIOS_getPageBySlug(this.pageInURL)
     }
   }
 </script>
