@@ -5,7 +5,7 @@
       <div class="navbar-brand">
         <n-link class="navbar-item" to="/">
           <figure class="image">
-            <img src="TEDxSchio-logo.png" alt="TEDx Schio">
+            <img src="/TEDxSchio-logo.png" alt="TEDx Schio">
           </figure>
         </n-link>
 
