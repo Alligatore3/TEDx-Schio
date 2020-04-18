@@ -44,7 +44,7 @@
 
           case 'contatti':
             const html = this.getPageBySlugFromVUEX(this.pageInURL) &&
-              this.getPageBySlugFromVUEX(this.pageInURL).content.rendered
+              this.getPageBySlugFromVUEX(this.pageInURL).content.rendered || ''
 
             return { instance: 'bindToHTML', props: { html } }
 
