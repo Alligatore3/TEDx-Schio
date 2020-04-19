@@ -43,6 +43,7 @@ export const getters = {
   getMenu: state => state.menu,
   getPages: state => state.pages,
   getCurrentEdition: state => state.TEDxEdition,
+  getCategoriesBySlugFromVUEX: state => slug => state[slug].categories,
   /**
    * @description Due to WP API we can't access to the category by simply '2019'
    * We have to find the ID first and then return the value.

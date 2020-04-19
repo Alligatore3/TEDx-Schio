@@ -5,12 +5,11 @@
       <h1 class="title is-2 ted-red has-text-centered my-3">
         I Partner di TEDxSchio {{ year }}
       </h1>
-      <div class="columns is-mobile is-multiline">
-        <PartnerRow
-          class="column is-half-tablet is-one-third-desktop is-one-quarter-widescreen"
-          v-for="(partner, index) in computedPartners"
-          :key="index"
-          :partner="partner" />
+      <div
+        class="row-category"
+        v-for="(row, index) in rowsCategories"
+        :key="index">
+        <PartnersRow :partners="computedPartners[row.slug]" :title="row.name"/>
       </div>
     </div>
   </div>
@@ -24,7 +23,7 @@
     name: "PartnersGrid",
     mixins: [axiosManager],
     components: {
-      PartnerRow: () => import('./PartnerRow'),
+      PartnersRow: () => import('./PartnersRow'),
       ButtonSpinner: () => import('@/components/common/ButtonSpinner')
     },
     props: {
@@ -34,19 +33,28 @@
       }
     },
     computed: {
-      ...mapGetters('application', ['isContextLoading', 'getEntityByYearFromVUEX']),
+      ...mapGetters('application', ['isContextLoading', 'getEntityByYearFromVUEX', 'getCategoriesBySlugFromVUEX']),
       partnersFromVUEX() {
         return this.getEntityByYearFromVUEX({ entity: 'partners', year: this.year })
       },
+      /**
+       * @todo
+       * @description Not a clear fn() but due to sharing categories
+       * from WP we have to filter them.
+       * @return {Array}
+       */
+      rowsCategories() {
+        return this.getCategoriesBySlugFromVUEX('partners').filter(cat => isNaN(cat.slug))
+      },
       computedPartners() {
-        return this.partnersFromVUEX &&
-          this.partnersFromVUEX.map(
-            partner => ({
-              slug: partner.slug,
-              image: partner.image_url,
-              name: partner.title.rendered,
-              description: partner.acf.descrizione
-            })
+        return this.rowsCategories &&
+          this.rowsCategories.reduce(
+            (acc, curr) => {
+              acc[curr.slug] = this.partnersFromVUEX.filter(
+                partner => partner['partners-category'].some( cat => cat === curr.id )
+              )
+              return acc
+            }, {}
           )
       }
     },
