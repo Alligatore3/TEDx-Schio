@@ -1,16 +1,16 @@
 <template>
   <div>
-    <ButtonSpinner v-if="!speakersFromVUEX" />
+    <ButtonSpinner v-if="!partnersFromVUEX" />
     <div v-else class="speakers">
       <h1 class="title is-2 ted-red has-text-centered my-3">
-        Gli Speaker di TEDxSchio {{ year }}
+        I Partner di TEDxSchio {{ year }}
       </h1>
       <div class="columns is-mobile is-multiline">
-        <Card
+        <PartnerRow
           class="column is-half-tablet is-one-third-desktop is-one-quarter-widescreen"
-          v-for="(speaker, index) in computedSpeakers"
+          v-for="(partner, index) in computedPartners"
           :key="index"
-          :speaker="speaker" />
+          :partner="partner" />
       </div>
     </div>
   </div>
@@ -21,10 +21,10 @@
   import axiosManager from "@/mixins/axiosManager";
 
   export default {
-    name: "SpeakersGrid",
+    name: "PartnersGrid",
     mixins: [axiosManager],
     components: {
-      Card: () => import('./Card'),
+      PartnerRow: () => import('./PartnerRow'),
       ButtonSpinner: () => import('@/components/common/ButtonSpinner')
     },
     props: {
@@ -35,30 +35,30 @@
     },
     computed: {
       ...mapGetters('application', ['isContextLoading', 'getEntityByYearFromVUEX']),
-      speakersFromVUEX() {
-        return this.getEntityByYearFromVUEX({ entity: 'speakers', year: this.year })
+      partnersFromVUEX() {
+        return this.getEntityByYearFromVUEX({ entity: 'partners', year: this.year })
       },
-      computedSpeakers() {
-        return this.speakersFromVUEX &&
-          this.speakersFromVUEX.map(
-            speaker => ({
-              slug: speaker.slug,
-              image: speaker.image_url,
-              name: speaker.title.rendered,
-              description: speaker.acf.descrizione
+      computedPartners() {
+        return this.partnersFromVUEX &&
+          this.partnersFromVUEX.map(
+            partner => ({
+              slug: partner.slug,
+              image: partner.image_url,
+              name: partner.title.rendered,
+              description: partner.acf.descrizione
             })
           )
       }
     },
     methods: {
-      ...mapMutations('application', ['SET_SPEAKERS'])
+      ...mapMutations('application', ['SET_PARTNERS'])
     },
     mounted() {
-      !this.speakersFromVUEX &&
+      !this.partnersFromVUEX &&
         this.AXIOS_getEntityByYear({
-          entity: 'speakers',
+          entity: 'partners',
           year: this.year,
-          mutation: this.SET_SPEAKERS
+          mutation: this.SET_PARTNERS
         })
     }
   }

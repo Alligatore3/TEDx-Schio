@@ -12,6 +12,9 @@ export const generateConfig = () => ({
   dir: 'tedx-dist',
   devtools: false,
   async routes() {
+    /**
+     * @see https://axios.nuxtjs.org/usage.html#shortcuts
+     */
     const { data: menuVoices } = await axios.get(`${ ENVs.MAMP.getFullAPIPath() }/menu`)
     const { data: allSpeakers } = await axios.get(`${ ENVs.MAMP.getFullAPIPath() }/speakers`)
 

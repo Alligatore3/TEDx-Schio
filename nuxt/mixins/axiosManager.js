@@ -43,7 +43,7 @@ export default {
      * @return {Promise<void>}
      */
     async AXIOS_getAllCategoriesByTaxonomy(taxonomy) {
-      const categories = await this.$axios.$get(`${ ENVs.MAMP.getFullAPIPath() }/${taxonomy}`)
+      const categories = await this.$axios.$get(`${ ENVs.MAMP.getFullAPIPath() }/${taxonomy}?per_page=30`)
       this.SET_CATEGORIES_BY({ key: taxonomy, categories } )
       return categories
     },
@@ -64,7 +64,7 @@ export default {
       ) || false
       const categoryID = categoryByYear && categoryByYear.id
 
-      const entityFilteredByCategoryID = await this.$axios.$get(`${ ENVs.MAMP.getFullAPIPath() }/${entity}?${entity}-category=${categoryID}`)
+      const entityFilteredByCategoryID = await this.$axios.$get(`${ ENVs.MAMP.getFullAPIPath() }/${entity}?${entity}-category=${categoryID}&per_page=100`)
 
       mutation(entityFilteredByCategoryID)
       this.SET_CONTEXT_LOADING({ context: entity, isLoading: false })

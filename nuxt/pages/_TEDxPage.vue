@@ -19,6 +19,7 @@
       ButtonSpinner: () => import('@/components/common/ButtonSpinner'),
       Hero: () => import('@/components/common/Hero'),
       SpeakersGrid: () => import('@/components/common/SpeakersGrid/index'),
+      PartnersGrid: () => import('@/components/common/PartnersGrid/index'),
       bindToHTML: () => import('@/components/common/bindToHTML'),
     },
     computed: {
@@ -41,6 +42,9 @@
         switch (this.pageInURL) {
           case 'speakers':
             return { instance: 'SpeakersGrid', props: { year: this.getCurrentEdition } }
+
+          case 'partners':
+            return { instance: 'PartnersGrid', props: { year: this.getCurrentEdition } }
 
           case 'contatti':
             const html = this.getPageBySlugFromVUEX(this.pageInURL) &&

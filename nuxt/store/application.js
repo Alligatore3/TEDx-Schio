@@ -2,6 +2,10 @@ export const state = () => ({
   TEDxEdition: 2019,
   menu: [],
   pages: [],
+  partners: {
+    categories: [],
+    posts: [],
+  },
   speakers: {
     categories: [],
     posts: [],
@@ -50,11 +54,11 @@ export const getters = {
       announcer => announcer['announcers-category'][0] === categoryID
     )
   },
-  getSpeakersByYearFromVUEX: state => year => {
-    const categoryID = getCategoryIDFromByYear({ state, from: 'speakers', year })
+  getEntityByYearFromVUEX: state => ({ entity, year }) => {
+    const categoryID = getCategoryIDFromByYear({ state, from: entity, year })
 
-    return categoryID && state.speakers.posts.filter(
-      speaker => speaker['speakers-category'][0] === categoryID
+    return categoryID && state[entity].posts.filter(
+      speaker => speaker[`${entity}-category`][0] === categoryID
     )
   },
   getPageBySlugFromVUEX: state => slug => searchFor({ where: state.pages, key: 'slug', what: slug }),
@@ -64,6 +68,7 @@ export const getters = {
 
 export const mutations = {
   SET_MENU: (state, menu) => (state.menu = menu),
+  SET_PARTNERS: (state, partners) => (state.partners.posts = partners),
   SET_SPEAKERS: (state, speakers) => (state.speakers.posts = speakers),
   PUSH_A_PAGE: (state, pageToPush) => (state.pages = state.pages.concat(pageToPush)),
   PUSH_A_SPEAKER: (state, speakerToPush) => (state.speakers.posts = state.speakers.posts.concat(speakerToPush)),
