@@ -41,10 +41,14 @@
        * @todo
        * @description Not a clear fn() but due to sharing categories
        * from WP we have to filter them.
+       * Multiple methods are required for order.
        * @return {Array}
        */
       rowsCategories() {
-        return this.getCategoriesBySlugFromVUEX('partners').filter(cat => isNaN(cat.slug))
+        return this.getCategoriesBySlugFromVUEX('partners')
+          .filter(cat => isNaN(cat.slug))
+          .map(cat => ({ ...cat, priority: parseInt(cat.description, 10) }))
+          .sort((a, b) => a.priority - b.priority)
       },
       computedPartners() {
         return this.rowsCategories &&
