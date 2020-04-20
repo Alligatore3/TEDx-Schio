@@ -1,7 +1,7 @@
 <template>
   <div class="container is-relative">
     <ButtonSpinner v-if="isContextLoading('menu')" />
-    <nav v-else class="navbar my-1" role="navigation" aria-label="main navigation">
+    <nav v-else :class="stickySearchClass" class="navbar py-1" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <n-link class="navbar-item" to="/">
           <figure class="image">
@@ -40,8 +40,21 @@
   export default {
     name: "TEDHeader",
     mixins:[axiosManager],
+    data: () => ({ stickySearchClass: '' }),
     components: {
       ButtonSpinner: () => import('@/components/common/ButtonSpinner')
+    },
+    methods: {
+      /**
+       * @function
+       * @name handleScroll
+       * @returns {Void}
+       */
+      handleScroll() {
+        this.stickySearchClass =
+          document.documentElement.scrollTop >= 300
+            ? "is-fixed-top" : "";
+      },
     },
     computed: {
       ...mapGetters('application', ['getMenu', 'isContextLoading']),
@@ -59,12 +72,22 @@
      * Either we refresh the page or navigate through menu.
      */
     mounted() {
+      window.addEventListener("scroll", this.handleScroll);
       !this.getMenu.length && this.AXIOS_getMenuVoices()
-    }
+    },
+    destroyed() {
+      window.removeEventListener("scroll", this.handleScroll);
+    },
   }
 </script>
 
 <style lang="scss" scoped>
+  .is-fixed-top {
+    z-index: 100;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
   .navbar-item {
     figure {
       max-width: 200px;
