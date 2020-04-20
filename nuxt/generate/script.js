@@ -15,8 +15,8 @@ export const generateConfig = () => ({
     /**
      * @see https://axios.nuxtjs.org/usage.html#shortcuts
      */
-    const { data: menuVoices } = await axios.get(`${ ENVs.MAMP.getFullAPIPath() }/menu`)
-    const { data: allSpeakers } = await axios.get(`${ ENVs.MAMP.getFullAPIPath() }/speakers`)
+    const { data: menuVoices } = await axios.get(`${ ENVs.getFullAPIPath(true) }/menu`)
+    const { data: allSpeakers } = await axios.get(`${ ENVs.getFullAPIPath(true) }/speakers`)
 
     return menuVoices.map( voice => voice.title.toLowerCase() ).concat(
       allSpeakers.map( speaker => `speaker/${speaker.slug}`)

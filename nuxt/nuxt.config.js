@@ -10,18 +10,18 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: ENVs.NETSONS.SEO.title,
+    title: ENVs.SEO.title,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: ENVs.NETSONS.SEO.description },
+      { hid: 'description', name: 'description', content: ENVs.SEO.description },
 
-      { hid: 'og:title', name: 'og:title', content: ENVs.NETSONS.SEO.title },
-      { hid: 'og:description', name: 'og:description', content: ENVs.NETSONS.SEO.description },
-      { hid: 'og:url', name: 'og:url', content: ENVs.NETSONS.getFullPath() },
+      { hid: 'og:title', name: 'og:title', content: ENVs.SEO.title },
+      { hid: 'og:description', name: 'og:description', content: ENVs.SEO.description },
+      { hid: 'og:url', name: 'og:url', content: ENVs.getFullPath() },
 
-      { hid: 'twitter:title', name: 'twitter:title', content: ENVs.NETSONS.SEO.title },
-      { hid: 'twitter:description', name: 'twitter:description', content: ENVs.NETSONS.SEO.description },
+      { hid: 'twitter:title', name: 'twitter:title', content: ENVs.SEO.title },
+      { hid: 'twitter:description', name: 'twitter:description', content: ENVs.SEO.description },
     ],
     link: [
       { rel: 'icon', type: 'image/png', href: '/favicon.png' }
@@ -108,6 +108,6 @@ export default {
    * @see https://nuxtjs.org/api/configuration-router/#base
    */
   router: {
-    base: ENVs.NETSONS.basePath
+    base: ENVs[process.env.NODE_ENV].basePath
   }
 }
