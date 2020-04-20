@@ -15,7 +15,7 @@ export default {
      */
     async AXIOS_getMenuVoices() {
       this.SET_CONTEXT_LOADING({ context: 'menu', isLoading: true })
-      const menuVoices = await this.$axios.$get(`${ ENVs.MAMP.getFullAPIPath() }/menu`)
+      const menuVoices = await this.$axios.$get(`${ ENVs.NETSONS.getFullAPIPath() }/menu`)
 
       this.SET_MENU(menuVoices)
       this.SET_CONTEXT_LOADING({ context: 'menu', isLoading: false })
@@ -28,7 +28,7 @@ export default {
      */
     async AXIOS_getEntityBySlug({ entity, slug, mutation }) {
       this.SET_CONTEXT_LOADING({ context: entity, isLoading: true })
-      const entityResponse = await this.$axios.$get(`${ ENVs.MAMP.getFullAPIPath() }/${entity}?slug=${slug}`)
+      const entityResponse = await this.$axios.$get(`${ ENVs.NETSONS.getFullAPIPath() }/${entity}?slug=${slug}`)
 
       if(!entityResponse[0]) {
         throw new Error(`${entity} not found`)
@@ -43,7 +43,7 @@ export default {
      * @return {Promise<void>}
      */
     async AXIOS_getAllCategoriesByTaxonomy(taxonomy) {
-      const categories = await this.$axios.$get(`${ ENVs.MAMP.getFullAPIPath() }/${taxonomy}?per_page=30`)
+      const categories = await this.$axios.$get(`${ ENVs.NETSONS.getFullAPIPath() }/${taxonomy}?per_page=30`)
       this.SET_CATEGORIES_BY({ key: taxonomy, categories } )
       return categories
     },
@@ -64,7 +64,7 @@ export default {
       ) || false
       const categoryID = categoryByYear && categoryByYear.id
 
-      const entityFilteredByCategoryID = await this.$axios.$get(`${ ENVs.MAMP.getFullAPIPath() }/${entity}?${entity}-category=${categoryID}&per_page=100`)
+      const entityFilteredByCategoryID = await this.$axios.$get(`${ ENVs.NETSONS.getFullAPIPath() }/${entity}?${entity}-category=${categoryID}&per_page=100`)
 
       mutation(entityFilteredByCategoryID)
       this.SET_CONTEXT_LOADING({ context: entity, isLoading: false })
