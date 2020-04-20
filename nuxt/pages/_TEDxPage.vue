@@ -2,7 +2,7 @@
   <div class="container">
     <ButtonSpinner v-if="isContextLoading('page')" />
     <div class="my-2" v-else>
-      <Hero size="is-medium" :image="bannerInfo.image" :title="bannerInfo.title" />
+      <Hero v-if="bannerInfo.image" size="is-medium" :image="bannerInfo.image" :title="bannerInfo.title" />
       <component :is="dynamicComponent.instance" v-bind="dynamicComponent.props" />
     </div>
   </div>
@@ -46,6 +46,7 @@
           case 'partners':
             return { instance: 'PartnersGrid', props: { year: this.getCurrentEdition } }
 
+          case 'programma':
           case 'contatti':
             const html = this.getPageBySlugFromVUEX(this.pageInURL) &&
               this.getPageBySlugFromVUEX(this.pageInURL).content.rendered || ''
