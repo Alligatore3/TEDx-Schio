@@ -54,7 +54,7 @@
        */
       handleScroll() {
         this.stickySearchClass =
-          document.documentElement.scrollTop >= 300
+          document.documentElement.scrollTop >= 200
             ? "is-fixed-top" : "";
       },
     },
@@ -85,7 +85,8 @@
 
 <style lang="scss" scoped>
   .is-fixed-top {
-    z-index: 100;
+    z-index: 180;
+    border-bottom: 2px solid $ted-red;
   }
 
   .navbar-item {
