@@ -1,0 +1,11 @@
+.page-enter-active {
+  transition: opacity .5s ease .3s;
+}
+
+.page-leave-active {
+  transition: opacity .5s ease 0s;
+}
+
+.page-enter, .page-leave-active {
+  opacity: 0;
+}

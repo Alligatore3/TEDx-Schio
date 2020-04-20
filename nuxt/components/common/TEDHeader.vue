@@ -1,30 +1,32 @@
 <template>
-  <div class="container is-relative">
+  <div class="is-relative">
     <ButtonSpinner v-if="isContextLoading('menu')" />
     <nav v-else :class="stickySearchClass" class="navbar py-1" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <n-link class="navbar-item" to="/">
-          <figure class="image">
-            <img src="/TEDxSchio-logo.png" alt="TEDx Schio">
-          </figure>
-        </n-link>
+      <div class="container">
+        <div class="navbar-brand">
+          <n-link class="navbar-item" to="/">
+            <figure class="image">
+              <img src="/TEDxSchio-logo.png" alt="TEDx Schio">
+            </figure>
+          </n-link>
 
-        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
+          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
 
-      <div class="navbar-menu">
-        <div class="navbar-end">
-          <div
-            v-for="voice in computedMenuVoices"
-            :key="voice.id"
-            class="navbar-item mx-1 has-text-weight-medium pointer">
-            <n-link :to="`/${voice.title.toLowerCase()}`">
-              {{ voice.title }}
-            </n-link>
+        <div class="navbar-menu">
+          <div class="navbar-end">
+            <div
+              v-for="voice in computedMenuVoices"
+              :key="voice.id"
+              class="navbar-item mx-1 has-text-weight-medium pointer">
+              <n-link :to="`/${voice.title.toLowerCase()}`">
+                {{ voice.title }}
+              </n-link>
+            </div>
           </div>
         </div>
       </div>
@@ -84,8 +86,6 @@
 <style lang="scss" scoped>
   .is-fixed-top {
     z-index: 100;
-    padding-left: 1rem;
-    padding-right: 1rem;
   }
 
   .navbar-item {

@@ -91,6 +91,12 @@ export default {
     }
   },
   /**
+   * @see https://nuxtjs.org/api/pages-transition#__layout
+   */
+  pageTransition: {
+    name: 'page'
+  },
+  /**
    * @description Configure the generation of your universal web application
    * to a static web application.
    * @see https://nuxtjs.org/api/configuration-generate/
