@@ -31,7 +31,8 @@ export default {
       const entityResponse = await this.$axios.$get(`${ ENVs.getFullAPIPath() }/${entity}?slug=${slug}`)
 
       if(!entityResponse[0]) {
-        throw new Error(`${entity} not found`)
+        console.error(`${entity} not found`)
+        this.$router.push({ path: '/error' })
       } else {
         mutation(entityResponse[0])
       }
