@@ -26,3 +26,15 @@
     }
   }
 }
+
+/**
+ * @see https://stackoverflow.com/a/41869915
+ */
+.reverse-columns-mobile {
+  @media(max-width: 1023px) {
+    flex-direction: column-reverse;
+    display: flex;
+    margin-top: 2rem !important;
+    margin-bottom: 2rem !important;
+  }
+}
