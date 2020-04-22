@@ -4,7 +4,7 @@
       <footer class="footer transparent-bg">
         <div class="content">
           <div class="columns is-multiline is-vcentered">
-            <div class="column">
+            <div class="column mb-2-mobile">
               <p class="has-text-left ted-white">
                 Trame | Associazione per Tedx Schio | C.F. 94020440247
               </p>
@@ -15,12 +15,12 @@
                 Email: <a class="ted-white" href="mailto:tedxschio@gmail.com">tedxschio@gmail.com</a>
               </p>
             </div>
-            <div class="column">
-              <div class="columns h-100 is-vcentered">
+            <div class="column mb-2-mobile">
+              <div class="columns is-mobile h-100 is-vcentered">
                 <div
                   :key="social.name"
                   v-for="social in socials"
-                  class="column">
+                  class="column is-one-third-mobile">
                   <a itemprop="url" rel="noreferrer" :href="social.url" target="_blank">
                     <figure class="image mx-auto is-32x32">
                       <img :src="`/icons/${social.name}.png`" :alt="social.name" />
@@ -30,10 +30,10 @@
               </div>
             </div>
             <div class="column">
-              <p class="has-text-right ted-white">
+              <p class="has-text-right has-text-left-mobile ted-white">
                 © TEDxSchio.
               </p>
-              <p class="has-text-right ted-white">
+              <p class="has-text-right has-text-left-mobile ted-white">
                 This independent TEDx event is operated under license from TED.
               </p>
             </div>

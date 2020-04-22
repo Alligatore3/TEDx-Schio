@@ -1,6 +1,7 @@
 export const state = () => ({
   TEDxEdition: 2019,
   menu: [],
+  menuMobileOpened: false,
   pages: [],
   partners: {
     categories: [],
@@ -41,6 +42,7 @@ const searchFor = ({ where, key, what }) => where.find(
 
 export const getters = {
   getMenu: state => state.menu,
+  getMenuMobileStatus: state => state.menuMobileOpened,
   getPages: state => state.pages,
   getCurrentEdition: state => state.TEDxEdition,
   getCategoriesBySlugFromVUEX: state => slug => state[slug].categories,
@@ -69,6 +71,7 @@ export const getters = {
 
 export const mutations = {
   SET_MENU: (state, menu) => (state.menu = menu),
+  SET_MENU_MOBILE_STATUS: (state, status) => (state.menuMobileOpened = status),
   SET_PARTNERS: (state, partners) => (state.partners.posts = partners),
   SET_SPEAKERS: (state, speakers) => (state.speakers.posts = speakers),
   PUSH_A_PAGE: (state, pageToPush) => (state.pages = state.pages.concat(pageToPush)),

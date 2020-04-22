@@ -1,11 +1,13 @@
 <template>
   <div v-if="getPageBySlugFromVUEX('homepage')">
     <Hero :image="homepageACFMetaBy('full_width_image')" />
-    <div class="container">
-      <div class="mt-2" v-html="getPageBySlugFromVUEX('homepage').content.rendered"></div>
-      <Announcer :year="getCurrentEdition" />
-      <SpeakersGrid :year="getCurrentEdition" />
-    </div>
+    <section class="section">
+      <div class="container">
+        <div v-html="getPageBySlugFromVUEX('homepage').content.rendered"></div>
+        <Announcer :year="getCurrentEdition" />
+        <SpeakersGrid :year="getCurrentEdition" />
+      </div>
+    </section>
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto" :class="{'sub-container' : size === 'is-medium'}">
+  <div :class="{'sub-container mx-auto' : size === 'is-medium'}">
     <section class="hero" :class="size">
       <div class="hero-body is-relative over-hidden">
         <img v-if="image" class="hero-image" :src="image" alt="Banner Image" />
@@ -54,5 +54,11 @@
     bottom: calc(50% - 60px);
     left: 150px;
     font-size: 5rem;
+
+    @media all and (max-width: 768px) {
+      left: 10%;
+      bottom: 0;
+      font-size: 2.5rem;
+    }
   }
 </style>

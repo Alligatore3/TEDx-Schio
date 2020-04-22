@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-3">
+  <div class="column is-half-tablet is-one-third-desktop is-one-quarter-widescreen mb-3">
     <n-link :to="`speaker/${speaker.slug}`">
       <figure class="image over-hidden">
         <img :src="speaker.image" :alt="speaker.name" />

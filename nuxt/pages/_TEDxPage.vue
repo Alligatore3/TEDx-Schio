@@ -1,11 +1,13 @@
 <template>
-  <div class="container">
-    <ButtonSpinner v-if="isContextLoading('page')" />
-    <div class="my-2" v-else>
-      <Hero v-if="bannerInfo.image" size="is-medium" :image="bannerInfo.image" :title="bannerInfo.title" />
-      <component :is="dynamicComponent.instance" v-bind="dynamicComponent.props" />
+  <section class="section">
+    <div class="container">
+      <ButtonSpinner v-if="isContextLoading('page')" />
+      <div class="my-2" v-else>
+        <Hero v-if="bannerInfo.image" size="is-medium" :image="bannerInfo.image" :title="bannerInfo.title" />
+        <component :is="dynamicComponent.instance" v-bind="dynamicComponent.props" />
+      </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

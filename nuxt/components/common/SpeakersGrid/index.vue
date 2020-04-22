@@ -5,9 +5,8 @@
       <h1 class="title is-2 ted-red has-text-centered my-3">
         Gli Speaker di TEDxSchio {{ year }}
       </h1>
-      <div class="columns is-mobile is-multiline">
+      <div class="columns is-tablet is-multiline">
         <Card
-          class="column is-half-tablet is-one-third-desktop is-one-quarter-widescreen"
           v-for="(speaker, index) in computedSpeakers"
           :key="index"
           :speaker="speaker" />

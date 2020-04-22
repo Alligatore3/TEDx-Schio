@@ -1,8 +1,10 @@
 <template>
-  <div class="container is-relative">
-    <ButtonSpinner v-if="!getSpeakerBySlugFromVUEX(speakerName)" />
-    <SubjectBlock v-else :subject="computedSpeaker" />
-  </div>
+  <section class="section">
+    <div class="container is-relative">
+      <ButtonSpinner v-if="!getSpeakerBySlugFromVUEX(speakerName)" />
+      <SubjectBlock v-else :subject="computedSpeaker" />
+    </div>
+  </section>
 </template>
 
 <script>
