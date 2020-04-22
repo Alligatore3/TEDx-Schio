@@ -108,6 +108,7 @@ export default {
    * @see https://nuxtjs.org/api/configuration-router/#base
    */
   router: {
-    base: ENVs[process.env.NODE_ENV].basePath
+    // base: ENVs[process.env.NODE_ENV].basePath
+    base: ENVs.development.basePath
   }
 }

@@ -41,6 +41,9 @@
         </div>
       </footer>
     </div>
+    <div @click="scrollToTop" class="arrow-top pointer" :class="{ 'none' : hideArrow }">
+      <img src="icons/arrow.png" alt="arrow-top" />
+    </div>
   </div>
 </template>
 
@@ -48,17 +51,53 @@
   export default {
     name: "TEDFooter",
     data: () => ({
+      hideArrow: true,
       socials: [
         { name: 'facebook', url: 'https://www.facebook.com/TEDxSchio/' },
         { name: 'instagram', url: 'https://www.instagram.com/tedxschio/' },
         { name: 'linkedin', url: 'https://www.linkedin.com/company/tedxschio/' },
       ]
-    })
+    }),
+    methods: {
+      /**
+       * @see https://developer.mozilla.org/en-US/docs/Web/API/ScrollToOptions#Properties
+       * @see https://stackoverflow.com/a/50456738
+       */
+      scrollToTop() {
+        const opts = { left: 0, top: 0, behavior: 'smooth' }
+        window && window.scrollTo(opts);
+      },
+      handleScrollToTop() {
+        this.hideArrow = document.documentElement.scrollTop <= 200
+      },
+    },
+    mounted() {
+      window.addEventListener("scroll", this.handleScrollToTop);
+    },
+    destroyed() {
+      window.removeEventListener("scroll", this.handleScrollToTop);
+    }
   }
 </script>
 
-<style scoped>
-  .fa-linkedin:before {
-    content: "\f08c";
+<style lang="scss" scoped>
+  .arrow-top {
+    border-radius: 100%;
+    background-color: $ted-white;
+    border: 2px solid $ted-dark-black;
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 50;
+
+    img {
+      max-width: 75%;
+      transform: rotate(180deg);
+      left: 8px;
+      position: absolute;
+      top: 7px;
+    }
   }
 </style>
