@@ -15,7 +15,7 @@
 <script>
   import { mapGetters } from 'vuex'
   export default {
-    data: () => ({ swapHeight: null }),
+    data: () => ({ swapHeight: 'auto' }),
     components: {
       TEDHeader: () => import('@/components/common/TEDHeader'),
       TEDFooter: () => import('@/components/common/TEDFooter'),
