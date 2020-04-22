@@ -31,7 +31,7 @@
  * @see https://stackoverflow.com/a/41869915
  */
 .reverse-columns-mobile {
-  @media(max-width: 1023px) {
+  @media all and (max-width: 1023px) {
     flex-direction: column-reverse;
     display: flex;
     margin-top: 2rem !important;
