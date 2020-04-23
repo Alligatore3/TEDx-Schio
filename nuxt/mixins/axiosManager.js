@@ -5,14 +5,27 @@ export default {
   methods: {
     ...mapMutations('application', [ 'SET_MENU', 'SET_CATEGORIES_BY']),
     /**
+     * @description Shortcut to avoid DRY pattern.
+     * @param {String} error What to print in console as error.
+     */
+    errorHandlerHelper(error) {
+      console.error(error)
+      this.$router.push({ path: '/error' })
+    },
+    /**
      * @description This fetch from API the menu voices and sets in VUEX
      * We map the response to avoid 1 call for fetching HOMEPAGE ID
      * but at the same time we filter the menuvoice.
      */
     async AXIOS_getMenuVoices() {
-      const menuVoices = await this.$axios.$get(`${ ENVs.getFullAPIPath() }/menu`)
+      try {
+        const menuVoices = await this.$axios.$get(`${ ENVs.getFullAPIPath() }/menu`)
 
-      this.SET_MENU(menuVoices)
+        this.SET_MENU(menuVoices)
+      }
+      catch (e) {
+        this.errorHandlerHelper(e)
+      }
     },
     /**
      * @see https://wordpress.stackexchange.com/a/284302
@@ -21,13 +34,14 @@ export default {
      * @return {Promise<void>}
      */
     async AXIOS_getEntityBySlug({ entity, slug, mutation }) {
-      const entityResponse = await this.$axios.$get(`${ ENVs.getFullAPIPath() }/${entity}?slug=${slug}`)
+      try {
+        const entityResponse = await this.$axios.$get(`${ ENVs.getFullAPIPath() }/${entity}?slug=${slug}`)
 
-      if(!entityResponse[0]) {
-        console.error(`${entity} not found`)
-        this.$router.push({ path: '/error' })
-      } else {
-        mutation(entityResponse[0])
+        if(!entityResponse[0]) this.errorHandlerHelper(`${entity} not found`)
+        else mutation(entityResponse[0])
+      }
+      catch (e) {
+        this.errorHandlerHelper(e)
       }
     },
     /**
@@ -36,10 +50,15 @@ export default {
      * @return {Promise<void>}
      */
     async AXIOS_getAllCategoriesByTaxonomy(taxonomy) {
-      const categories = await this.$axios.$get(`${ ENVs.getFullAPIPath() }/${taxonomy}?per_page=30`)
-      this.SET_CATEGORIES_BY({ key: taxonomy, categories } )
+      try {
+        const categories = await this.$axios.$get(`${ ENVs.getFullAPIPath() }/${taxonomy}?per_page=30`)
+        this.SET_CATEGORIES_BY({ key: taxonomy, categories } )
 
-      return categories
+        return categories
+      }
+      catch (e) {
+        this.errorHandlerHelper(e)
+      }
     },
     /**
      * @description Given an entity we first have to fetch for categories of that
@@ -50,16 +69,21 @@ export default {
      * @param {Function} mutation Reference of VUEX mutation
      */
     async AXIOS_getEntityByYear({ entity, year, mutation }) {
-      const entityCategories = await this.AXIOS_getAllCategoriesByTaxonomy(`${entity}-category`)
+      try {
+        const entityCategories = await this.AXIOS_getAllCategoriesByTaxonomy(`${entity}-category`)
 
-      const categoryByYear = entityCategories.find(
-        category => category.slug === year.toString()
-      ) || false
-      const categoryID = categoryByYear && categoryByYear.id
+        const categoryByYear = entityCategories.find(
+          category => category.slug === year.toString()
+        ) || false
+        const categoryID = categoryByYear && categoryByYear.id
 
-      const entityFilteredByCategoryID = await this.$axios.$get(`${ ENVs.getFullAPIPath() }/${entity}?${entity}-category=${categoryID}&per_page=100`)
+        const entityFilteredByCategoryID = await this.$axios.$get(`${ ENVs.getFullAPIPath() }/${entity}?${entity}-category=${categoryID}&per_page=100`)
 
-      mutation(entityFilteredByCategoryID)
+        mutation(entityFilteredByCategoryID)
+      }
+      catch (e) {
+        this.errorHandlerHelper(e)
+      }
     },
   }
 }
