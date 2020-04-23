@@ -15,12 +15,6 @@ export const state = () => ({
     categories: [],
     posts: [],
   },
-  loaders: {
-    menu: true,
-    pages: true,
-    announcers: true,
-    speakers: true,
-  }
 })
 
 /**
@@ -66,7 +60,6 @@ export const getters = {
   },
   getPageBySlugFromVUEX: state => slug => searchFor({ where: state.pages, key: 'slug', what: slug }),
   getSpeakerBySlugFromVUEX: state => slug => searchFor({ where: state.speakers.posts, key: 'slug', what: slug }),
-  isContextLoading: state => context => state.loaders[context],
 }
 
 export const mutations = {
@@ -96,5 +89,4 @@ export const mutations = {
         }
       )
   },
-  SET_CONTEXT_LOADING: (state, { context, isLoading }) => (state.loaders[context] = isLoading)
 }

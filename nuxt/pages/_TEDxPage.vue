@@ -1,7 +1,7 @@
 <template>
   <section class="section">
     <div class="container">
-      <ButtonSpinner v-if="isContextLoading('page')" />
+      <ButtonSpinner v-if="!getPageBySlugFromVUEX(pageInURL)" />
       <div class="my-2" v-else>
         <Hero v-if="bannerInfo.image" size="is-medium" :image="bannerInfo.image" :title="bannerInfo.title" />
         <component :is="dynamicComponent.instance" v-bind="dynamicComponent.props" />
@@ -25,7 +25,7 @@
       bindToHTML: () => import('@/components/common/bindToHTML'),
     },
     computed: {
-      ...mapGetters('application', ['getPages', 'isContextLoading', 'getCurrentEdition', 'getPageBySlugFromVUEX']),
+      ...mapGetters('application', ['getPages', 'getCurrentEdition', 'getPageBySlugFromVUEX']),
       pageInURL() {
           return this.$route.params && this.$route.params.TEDxPage
       },

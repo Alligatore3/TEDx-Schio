@@ -1,6 +1,6 @@
 <template>
   <div class="is-relative my-6">
-    <ButtonSpinner v-if="isContextLoading('announcers')" />
+    <ButtonSpinner v-if="!getAnnouncerByYearFromVUEX(year)" />
     <SubjectBlock v-else :subject="computedAnnouncer" />
   </div>
 </template>
@@ -23,7 +23,7 @@
       SubjectBlock: () => import('@/components/common/SubjectBlock'),
     },
     computed: {
-      ...mapGetters('application', ['getAnnouncerByYearFromVUEX', 'isContextLoading']),
+      ...mapGetters('application', ['getAnnouncerByYearFromVUEX']),
       computedAnnouncer() {
         const { content: { rendered: excerpt }, image_url } = this.getAnnouncerByYearFromVUEX(this.year)
         return {

@@ -1,6 +1,6 @@
 <template>
   <div class="is-relative">
-    <ButtonSpinner v-if="isContextLoading('menu')" />
+    <ButtonSpinner v-if="!getMenu.length" />
     <nav v-else :class="stickySearchClass" class="navbar py-1" role="navigation" aria-label="main navigation">
       <div class="container">
         <div class="navbar-brand">
@@ -67,7 +67,7 @@
       },
     },
     computed: {
-      ...mapGetters('application', ['getMenu', 'isContextLoading', 'getMenuMobileStatus']),
+      ...mapGetters('application', ['getMenu', 'getMenuMobileStatus']),
       computedMenuVoices() {
         return this.getMenu.map(
           (voice, index) => ({

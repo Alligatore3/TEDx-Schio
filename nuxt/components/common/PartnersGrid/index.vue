@@ -33,7 +33,7 @@
       }
     },
     computed: {
-      ...mapGetters('application', ['isContextLoading', 'getEntityByYearFromVUEX', 'getCategoriesBySlugFromVUEX']),
+      ...mapGetters('application', ['getEntityByYearFromVUEX', 'getCategoriesBySlugFromVUEX']),
       partnersFromVUEX() {
         return this.getEntityByYearFromVUEX({ entity: 'partners', year: this.year })
       },
