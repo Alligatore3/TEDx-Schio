@@ -17,6 +17,10 @@ export default {
   ** Headers of the page
   */
   head: {
+    /**
+     * @see https://stackoverflow.com/a/48239378
+     */
+    htmlAttrs: { lang: 'it' },
     title: ENVs.SEO.title,
     meta: [
       { charset: 'utf-8' },

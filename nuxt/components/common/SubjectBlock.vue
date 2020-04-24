@@ -9,7 +9,7 @@
     <div class="mt-1 columns is-multiline">
       <div class="column">
         <figure class="image">
-          <img :src="subject.image_url" :alt="subject.name">
+          <img :src="subject.image_url" :alt="subject.title">
         </figure>
       </div>
       <div class="column">
