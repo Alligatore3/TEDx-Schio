@@ -5,11 +5,11 @@
   "author": "Mattia Zanella",
   "private": true,
   "scripts": {
-    "dev": "env NODE_ENV=production nuxt",
-    "serve": "env NODE_ENV=development nuxt",
+    "dev": "nuxt",
+    "serve": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "env NODE_ENV=production nuxt generate"
+    "generate": "nuxt generate"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.9.7",
@@ -17,6 +17,7 @@
     "nuxt": "^2.0.0"
   },
   "devDependencies": {
+    "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/style-resources": "^1.0.0",
     "node-sass": "^4.13.1",
     "sass-loader": "^8.0.2"

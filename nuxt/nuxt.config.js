@@ -1,6 +1,8 @@
 import { ENVs } from './constants'
 import { generateConfig } from "./generate/script";
 
+require('dotenv').config()
+
 export default {
   /**
    * @see https://nuxtjs.org/guide/commands/#single-page-application-deployment-spa-
@@ -55,6 +57,7 @@ export default {
   ** Nuxt.js dev-modules
   */
   buildModules: [
+    '@nuxtjs/dotenv'
   ],
   /*
   ** Nuxt.js modules
