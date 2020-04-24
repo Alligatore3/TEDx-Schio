@@ -23,6 +23,7 @@ const ENVs = {
    */
   getFullPath() {
     const base = this[process.env.NODE_ENV]
+
     const port = base.port ? `:${base.port}` : ''
     return `${ base.protocol }://${ base.host }${ port }`
   },

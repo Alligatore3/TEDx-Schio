@@ -5,11 +5,11 @@
   "author": "Mattia Zanella",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "serve": "nuxt",
+    "dev": "env NODE_ENV=production nuxt",
+    "serve": "env NODE_ENV=development nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "env NODE_ENV=production nuxt generate"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.9.7",
