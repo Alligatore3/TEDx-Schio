@@ -1,6 +1,11 @@
 import { ENVs } from './constants'
 import { generateConfig } from "./generate/script";
 
+/**
+ * @description The module loads variables from your .env file
+ * directly into your nuxt.js application context and process.env.
+ * @see https://github.com/nuxt-community/dotenv-module
+ */
 require('dotenv').config()
 
 export default {
