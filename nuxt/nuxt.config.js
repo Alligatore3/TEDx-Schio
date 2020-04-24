@@ -1,18 +1,18 @@
 import { ENVs } from './constants'
 import { generateConfig } from "./generate/script";
 
-/**
- * @description The module loads variables from your .env file
- * directly into your nuxt.js application context and process.env.
- * @see https://github.com/nuxt-community/dotenv-module
- */
-require('dotenv').config()
-
 export default {
   /**
    * @see https://nuxtjs.org/guide/commands/#single-page-application-deployment-spa-
    */
   mode: 'spa',
+  /**
+   * @description Define the development or production mode of Nuxt.js.
+   * @see https://nuxtjs.org/api/configuration-dev
+   */
+  env: {
+    dev: (process.env.NODE_ENV !== 'production'),
+  },
   /*
   ** Headers of the page
   */
@@ -53,17 +53,6 @@ export default {
       '@/assets/style/base/_vars.scss',
     ],
   },
-  /*
-  ** Plugins to load before mounting the App
-  */
-  plugins: [
-  ],
-  /*
-  ** Nuxt.js dev-modules
-  */
-  buildModules: [
-    '@nuxtjs/dotenv'
-  ],
   /*
   ** Nuxt.js modules
   */
