@@ -11,7 +11,7 @@ const ENVs = {
     path_API: 'wordpress/wp-json/wp/v2',
   },
   production: {
-    protocol: 'http',
+    protocol: 'https',
     host: 'develop.tedxschio.com',
     port: false,
     basePath: '/',
