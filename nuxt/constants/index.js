@@ -22,7 +22,7 @@ const ENVs = {
    * @see https://www.ibm.com/support/knowledgecenter/SSGMCP_5.2.0/com.ibm.cics.ts.internet.doc/topics/dfhtl_uricomp.html
    */
   getFullPath() {
-    const base = this[process.env.NODE_ENV]
+    const base = process.env.dev ? this.development : this.production
 
     const port = base.port ? `:${base.port}` : ''
     return `${ base.protocol }://${ base.host }${ port }`
@@ -32,7 +32,7 @@ const ENVs = {
    * @see https://www.ibm.com/support/knowledgecenter/SSGMCP_5.2.0/com.ibm.cics.ts.internet.doc/topics/dfhtl_uricomp.html
    */
   getFullAPIPath(forceToLocal) {
-    const base = forceToLocal && this.development || this[process.env.NODE_ENV]
+    const base = forceToLocal && this.development || (process.env.dev ? this.development : this.production)
     const port = base.port ? `:${base.port}` : ''
 
     return `${ base.protocol }://${ base.host }${ port }${base.basePath}/${ base.path_API }`
