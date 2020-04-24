@@ -82,7 +82,7 @@
      * Either we refresh the page or navigate through menu.
      */
     mounted() {
-      window.addEventListener("scroll", this.handleScroll);
+      window.addEventListener("scroll", this.handleScroll, { passive: true });
       !this.getMenu.length && this.AXIOS_getMenuVoices()
     },
     destroyed() {

@@ -42,7 +42,7 @@
       </footer>
     </div>
     <div @click="scrollToTop" class="arrow-top pointer" :class="{ 'none' : hideArrow }">
-      <img src="icons/arrow.png" alt="arrow-top" />
+      <img src="/icons/arrow.png" alt="arrow-top" />
     </div>
   </div>
 </template>
@@ -72,7 +72,7 @@
       },
     },
     mounted() {
-      window.addEventListener("scroll", this.handleScrollToTop);
+      window.addEventListener("scroll", this.handleScrollToTop, { passive: true });
     },
     destroyed() {
       window.removeEventListener("scroll", this.handleScrollToTop);

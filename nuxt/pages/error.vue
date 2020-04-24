@@ -9,6 +9,7 @@
       </h2>
       <div style="position:relative;height:0;padding-bottom:56.25%">
         <iframe
+          title="error-page-TED"
           src="https://embed.ted.com/talks/renny_gleeson_404_the_story_of_a_page_not_found"
           width="854"
           height="480"
