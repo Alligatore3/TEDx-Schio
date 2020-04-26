@@ -5,7 +5,8 @@
         <div class="content">
           <div class="columns is-multiline is-vcentered">
             <div class="column mb-2-mobile">
-              <p class="has-text-left ted-white">
+              <TEDLogo color="#fff"/>
+              <p class="mt-1 has-text-left ted-white">
                 Trame | Associazione per Tedx Schio | C.F. 94020440247
               </p>
               <p class="has-text-left ted-white">
@@ -58,6 +59,9 @@
         { name: 'linkedin', url: 'https://www.linkedin.com/company/tedxschio/' },
       ]
     }),
+    components: {
+      TEDLogo: () => import('@/components/common/TEDLogo'),
+    },
     methods: {
       /**
        * @see https://developer.mozilla.org/en-US/docs/Web/API/ScrollToOptions#Properties

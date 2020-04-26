@@ -11,7 +11,8 @@ export default {
    * @see https://nuxtjs.org/api/configuration-dev
    */
   env: {
-    dev: (process.env.NODE_ENV !== 'production'),
+    // dev: (process.env.NODE_ENV !== 'production'),
+    dev: false
   },
   /*
   ** Headers of the page

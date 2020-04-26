@@ -4,12 +4,7 @@
     <nav v-else :class="stickySearchClass" class="navbar py-1" role="navigation" aria-label="main navigation">
       <div class="container">
         <div class="navbar-brand">
-          <n-link @click.native="SET_MENU_MOBILE_STATUS(false)" class="navbar-item" to="/">
-            <figure class="image">
-              <img src="/TEDxSchio-logo.png" alt="TEDx Schio">
-            </figure>
-          </n-link>
-
+          <TEDLogo color="#000"/>
           <a
             @click="SET_MENU_MOBILE_STATUS(!getMenuMobileStatus)"
             role="button"
@@ -41,7 +36,7 @@
   </div>
 </template>
 
-<script>``
+<script>
   import { EMPTY_VALUE } from '@/constants'
   import { mapGetters, mapMutations } from 'vuex'
   import axiosManager from "@/mixins/axiosManager";
@@ -51,6 +46,7 @@
     mixins:[axiosManager],
     data: () => ({ stickySearchClass: '' }),
     components: {
+      TEDLogo: () => import('@/components/common/TEDLogo'),
       ButtonSpinner: () => import('@/components/common/ButtonSpinner')
     },
     methods: {
@@ -113,14 +109,6 @@
     }
 
     .navbar-item {
-      figure {
-        max-width: 200px;
-
-        img {
-          max-height: none;
-        }
-      }
-
       &.has-text-weight-medium {
         .nuxt-link-active,
         &:hover {
