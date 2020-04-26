@@ -9,7 +9,7 @@
     <h3 class="title is-3 mt-2 mb-1">
       {{ speaker.name }}
     </h3>
-    <p class="title is-6">
+    <p class="subtitle mt-1 is-6">
       {{ speaker.description }}
     </p>
   </div>
