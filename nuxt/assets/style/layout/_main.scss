@@ -1,3 +1,27 @@
+@font-face {
+  font-family: "TEDx";
+  src:
+    url('/fonts/Sharp_Grotesque_Book.woff') format('woff'),
+    url('/fonts/Sharp_Grotesque_Book.otf') format('otf');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TEDx";
+  src:
+    url('/fonts/Sharp_Grotesque_italic.woff') format('woff'),
+    url('/fonts/Sharp_Grotesque_italic.otf') format('otf');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "TEDx";
+  src:
+    url('/fonts/Sharp_Grotesque_bold.woff') format('woff'),
+    url('/fonts/Sharp_Grotesque_bold.otf') format('otf');
+  font-style: bold;
+}
+
 html,
 body {
   height: 100%;
@@ -5,9 +29,7 @@ body {
   margin:0;
   padding:0;
 
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-  Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
+  font-family: 'TEDx', Arial, sans-serif;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
