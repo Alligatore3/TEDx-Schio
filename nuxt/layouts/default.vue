@@ -3,7 +3,7 @@
     <div ref="header">
       <TEDHeader />
     </div>
-    <div :style="swapHeight" class="swap-prevent">
+    <div :style="swapHeight" class="swap-prevent margin-fallback">
       <nuxt v-if="getMenu.length" />
     </div>
     <div ref="footer">

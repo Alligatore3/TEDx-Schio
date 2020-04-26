@@ -1,7 +1,7 @@
 <template>
   <div class="is-relative">
     <ButtonSpinner v-if="!getMenu.length" />
-    <nav v-else :class="stickySearchClass" class="navbar py-1" role="navigation" aria-label="main navigation">
+    <nav v-else class="navbar is-fixed-top py-1" role="navigation" aria-label="main navigation">
       <div class="container">
         <div class="navbar-brand">
           <TEDLogo color="#000"/>
@@ -44,23 +44,12 @@
   export default {
     name: "TEDHeader",
     mixins:[axiosManager],
-    data: () => ({ stickySearchClass: '' }),
     components: {
       TEDLogo: () => import('@/components/common/TEDLogo'),
       ButtonSpinner: () => import('@/components/common/ButtonSpinner')
     },
     methods: {
-      ...mapMutations('application', ['SET_MENU_MOBILE_STATUS']),
-      /**
-       * @function
-       * @name handleScroll
-       * @returns {Void}
-       */
-      handleScroll() {
-        this.stickySearchClass =
-          document.documentElement.scrollTop >= 200
-            ? "is-fixed-top" : "";
-      },
+      ...mapMutations('application', ['SET_MENU_MOBILE_STATUS'])
     },
     computed: {
       ...mapGetters('application', ['getMenu', 'getMenuMobileStatus']),
@@ -78,11 +67,7 @@
      * Either we refresh the page or navigate through menu.
      */
     mounted() {
-      window.addEventListener("scroll", this.handleScroll, { passive: true });
       !this.getMenu.length && this.AXIOS_getMenuVoices()
-    },
-    destroyed() {
-      window.removeEventListener("scroll", this.handleScroll);
     },
     /**
      * @description Reactive fn() to add proper class for scroll.
@@ -100,13 +85,9 @@
 </script>
 
 <style lang="scss" scoped>
-  .navbar {
+  .navbar.is-fixed-top {
     z-index: 300;
-
-    &.is-fixed-top {
-      z-index: 180;
-      border-bottom: 2px solid $ted-red;
-    }
+    border-bottom: 2px solid $ted-red;
 
     .navbar-item {
       &.has-text-weight-medium {
