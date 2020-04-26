@@ -3,6 +3,7 @@
   src:
     url('/fonts/Sharp_Grotesque_Book.woff') format('woff'),
     url('/fonts/Sharp_Grotesque_Book.otf') format('otf');
+  font-weight: normal;
   font-style: normal;
 }
 
@@ -11,6 +12,7 @@
   src:
     url('/fonts/Sharp_Grotesque_italic.woff') format('woff'),
     url('/fonts/Sharp_Grotesque_italic.otf') format('otf');
+  font-weight: normal;
   font-style: italic;
 }
 
@@ -19,7 +21,8 @@
   src:
     url('/fonts/Sharp_Grotesque_bold.woff') format('woff'),
     url('/fonts/Sharp_Grotesque_bold.otf') format('otf');
-  font-style: bold;
+  font-weight: bold;
+  font-style: normal;
 }
 
 html,
