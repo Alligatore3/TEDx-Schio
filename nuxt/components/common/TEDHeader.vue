@@ -70,6 +70,7 @@
         }
       },
       menuVoiceClick(menuVoice, childSlug) {
+        this.SET_MENU_MOBILE_STATUS(false)
         const hasChilds = Boolean(menuVoice.childs.length)
         const path = childSlug ? `/${menuVoice.slug}/${childSlug}` : `/${menuVoice.slug}`
 
@@ -80,10 +81,6 @@
           this.$router.push({ path })
         }
       },
-      hideDropdown() {
-        this.dropdownActive = false
-        this.SET_MENU_MOBILE_STATUS(false)
-      }
     },
     computed: {
       ...mapGetters('application', ['getMenu', 'getMenuMobileStatus']),
