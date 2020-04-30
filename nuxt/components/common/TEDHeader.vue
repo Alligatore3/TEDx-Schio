@@ -24,24 +24,21 @@
               v-for="voice in computedMenuVoices"
               :key="voice.id"
               class="navbar-item mx-1 has-text-weight-medium pointer"
-              :class="{ 'has-dropdown is-hoverable is-relative' : voice.childs.length }">
-              <n-link
+              :class="classObject(voice.childs)">
+              <a
                 :class="{ 'navbar-link' : voice.childs.length }"
-                @click.native="SET_MENU_MOBILE_STATUS(false)"
-                :event="voice.childs.length ? '' : 'click'"
-                :to="`/${voice.slug}`">
+                @click="menuVoiceClick(voice)">
                 {{ voice.title }}
-              </n-link>
+              </a>
 
               <div v-if="voice.childs.length" class="navbar-dropdown">
-                <n-link
+                <a
                   v-for="child in voice.childs"
                   :key="child.ID"
                   class="navbar-item"
-                  @click.native="SET_MENU_MOBILE_STATUS(false)"
-                  :to="`/${voice.slug}/${child.slug}`">
+                  @click="menuVoiceClick(voice, child.slug)">
                   {{ child.title }}
-                </n-link>
+                </a>
               </div>
             </div>
           </div>
@@ -59,12 +56,34 @@
   export default {
     name: "TEDHeader",
     mixins:[axiosManager],
+    data: () => ({ dropdownActive: false }),
     components: {
       TEDLogo: () => import('@/components/common/TEDLogo'),
       ButtonSpinner: () => import('@/components/common/ButtonSpinner')
     },
     methods: {
-      ...mapMutations('application', ['SET_MENU_MOBILE_STATUS'])
+      ...mapMutations('application', ['SET_MENU_MOBILE_STATUS']),
+      classObject(childs) {
+        return {
+          'is-active': this.dropdownActive,
+          'has-dropdown is-relative': childs.length
+        }
+      },
+      menuVoiceClick(menuVoice, childSlug) {
+        const hasChilds = Boolean(menuVoice.childs.length)
+        const path = childSlug ? `/${menuVoice.slug}/${childSlug}` : `/${menuVoice.slug}`
+
+        if(hasChilds && !childSlug) {
+          this.dropdownActive = true
+        } else {
+          this.dropdownActive = false
+          this.$router.push({ path })
+        }
+      },
+      hideDropdown() {
+        this.dropdownActive = false
+        this.SET_MENU_MOBILE_STATUS(false)
+      }
     },
     computed: {
       ...mapGetters('application', ['getMenu', 'getMenuMobileStatus']),
@@ -97,6 +116,14 @@
      */
     mounted() {
       !this.getMenu.length && this.AXIOS_getMenuVoices()
+    },
+    /**
+     * @description Just a guard in case we chagne route with menu opened.
+     */
+    watch: {
+      '$route'() {
+        this.dropdownActive && (this.dropdownActive = false)
+      }
     },
     /**
      * @description Reactive fn() to add proper class for scroll.

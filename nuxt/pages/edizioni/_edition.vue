@@ -8,6 +8,7 @@
           <PageContentHTML :html="pageMetadata.body" />
           <Announcer :year="currentEditionFromURLInt" />
           <SpeakersGrid :year="currentEditionFromURLInt" />
+          <PartnersGrid :year="currentEditionFromURLInt" />
         </div>
       </section>
     </div>
@@ -26,6 +27,7 @@
       ButtonSpinner: () => import('@/components/common/ButtonSpinner'),
       Announcer: () => import('@/components/Announcer'),
       SpeakersGrid: () => import('@/components/common/SpeakersGrid/index'),
+      PartnersGrid: () => import('@/components/common/PartnersGrid/index'),
       PageContentHTML: () => import('@/components/common/PageContentHTML'),
     },
     computed: {

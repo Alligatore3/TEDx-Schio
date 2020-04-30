@@ -28,6 +28,8 @@ export default {
       }
     },
     /**
+     * @description WP Rest API - How to get featured image
+     * @see https://wordpress.stackexchange.com/a/268706
      * @see https://wordpress.stackexchange.com/a/284302
      * @param {String} entity 'pages' or 'speakers'.
      * @param {String} slug Speaker slug 'dino-lanzaretti' or page slug.
