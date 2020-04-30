@@ -75,7 +75,7 @@
         const path = childSlug ? `/${menuVoice.slug}/${childSlug}` : `/${menuVoice.slug}`
 
         if(hasChilds && !childSlug) {
-          this.dropdownActive = true
+          this.dropdownActive = !this.dropdownActive
         } else {
           this.dropdownActive = false
           this.$router.push({ path })
