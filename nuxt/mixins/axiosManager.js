@@ -35,7 +35,7 @@ export default {
      */
     async AXIOS_getEntityBySlug({ entity, slug, mutation }) {
       try {
-        const entityResponse = await this.$axios.$get(`${ ENVs.getFullAPIPath() }/${entity}?slug=${slug}`)
+        const entityResponse = await this.$axios.$get(`${ ENVs.getFullAPIPath() }/${entity}?slug=${slug}&_embed`)
 
         if(!entityResponse[0]) this.errorHandlerHelper(`${entity} not found`)
         else mutation(entityResponse[0])

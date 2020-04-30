@@ -22,7 +22,7 @@
       Hero: () => import('@/components/common/Hero'),
       SpeakersGrid: () => import('@/components/common/SpeakersGrid/index'),
       PartnersGrid: () => import('@/components/common/PartnersGrid/index'),
-      bindToHTML: () => import('@/components/common/bindToHTML'),
+      PageContentHTML: () => import('@/components/common/PageContentHTML'),
     },
     computed: {
       ...mapGetters('application', ['getPages', 'getCurrentEdition', 'getPageBySlugFromVUEX']),
@@ -53,7 +53,7 @@
             const html = this.getPageBySlugFromVUEX(this.pageInURL) &&
               this.getPageBySlugFromVUEX(this.pageInURL).content.rendered || ''
 
-            return { instance: 'bindToHTML', props: { html } }
+            return { instance: 'PageContentHTML', props: { html } }
 
           default:
             return ''

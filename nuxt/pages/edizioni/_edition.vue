@@ -1,15 +1,16 @@
 <template>
   <div>
-<!--    <Hero :image="homepageACFMetaBy('full_width_image')" />-->
-    <pre>
-      {{ getPageBySlugFromVUEX('2019') }}
-    </pre>
-    <section class="section">
-      <div class="container">
-        <Announcer :year="currentEditionFromURLInt" />
-        <SpeakersGrid :year="currentEditionFromURLInt" />
-      </div>
-    </section>
+    <ButtonSpinner v-if="!getPageBySlugFromVUEX(currentEditionFromURL)" />
+    <div v-else>
+      <Hero :image="pageMetadata.image" />
+      <section class="section">
+        <div class="container">
+          <PageContentHTML :html="pageMetadata.body" />
+          <Announcer :year="currentEditionFromURLInt" />
+          <SpeakersGrid :year="currentEditionFromURLInt" />
+        </div>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -21,8 +22,11 @@
     name: "Edition",
     mixins: [axiosManager],
     components: {
+      Hero: () => import('@/components/common/Hero'),
+      ButtonSpinner: () => import('@/components/common/ButtonSpinner'),
       Announcer: () => import('@/components/Announcer'),
       SpeakersGrid: () => import('@/components/common/SpeakersGrid/index'),
+      PageContentHTML: () => import('@/components/common/PageContentHTML'),
     },
     computed: {
       ...mapGetters('application', ['getPageBySlugFromVUEX']),
@@ -36,6 +40,15 @@
       },
       currentEditionFromURLInt() {
         return parseInt(this.currentEditionFromURL, 10)
+      },
+      pageMetadata() {
+        const {
+          content: { rendered: body },
+          _embedded: { 'wp:featuredmedia': medias }
+        } = this.getPageBySlugFromVUEX(this.currentEditionFromURL)
+        const image = medias[0] && medias[0].source_url
+
+        return { body, image }
       }
     },
     methods: {

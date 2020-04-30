@@ -4,7 +4,7 @@
 
 <script>
   export default {
-    name: "bindToHTML",
+    name: "PageContentHTML",
     props: {
       html: {
         type: String | Boolean,
