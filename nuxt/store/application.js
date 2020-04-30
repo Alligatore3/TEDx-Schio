@@ -55,7 +55,7 @@ export const getters = {
     const categoryID = getCategoryIDFromByYear({ state, from: entity, year })
 
     return categoryID && state[entity].posts.filter(
-      speaker => speaker[`${entity}-category`][0] === categoryID
+      entityFromVUEX => entityFromVUEX[`${entity}-category`][0] === categoryID
     )
   },
   getPageBySlugFromVUEX: state => slug => searchFor({ where: state.pages, key: 'slug', what: slug }),

@@ -55,6 +55,7 @@ export default {
   styleResources: {
     scss: [
       '@/assets/style/base/_vars.scss',
+      '@/assets/style/base/_override.scss',
     ],
   },
   /*

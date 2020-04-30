@@ -57,12 +57,3 @@ body {
 img {
   max-width: 100%;
 }
-
-.image {
-  &.is-256x256 {
-    img {
-      width: 256px;
-      height: 256px;
-    }
-  }
-}

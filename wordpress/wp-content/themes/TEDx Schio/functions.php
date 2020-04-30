@@ -3,12 +3,21 @@
  * @description Menus are currently not available in the WP Rest.
  * So what you need to do is register your own custom endpoint and then
  * just call that route from your application that needs it.
+ * EDIT: since the base API REST doesn't provide menu voice SLUG
+ * we have to add it.
 
+ * @see https://wordpress.stackexchange.com/a/306294
  * @see https://wordpress.stackexchange.com/a/274513
 */
 function get_menu() {
-    # Change 'menu' to your own navigation slug.
-    return wp_get_nav_menu_items('main-menu');
+    $menu_items = wp_get_nav_menu_items('main-menu');
+    foreach($menu_items as $menu_item) {
+        // ALTERNATIVE: $slug = get_post_field( 'post_name', $menu_item->object_id );
+        $slug = basename( get_permalink($menu_item->object_id) );
+        $menu_item->slug = $slug;
+    }
+
+    return $menu_items;
 }
 
 /**

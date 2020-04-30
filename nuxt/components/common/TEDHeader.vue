@@ -1,6 +1,6 @@
 <template>
   <div class="is-relative">
-    <ButtonSpinner v-if="!getMenu.length" />
+    <ButtonSpinner v-if="!computedMenuVoices.length" />
     <nav v-else class="navbar is-fixed-top py-1" role="navigation" aria-label="main navigation">
       <div class="container">
         <div class="navbar-brand">
@@ -18,16 +18,31 @@
             <span aria-hidden="true"></span>
           </a>
         </div>
-
         <div class="navbar-menu" :class="{ 'is-active mobile-menu' : getMenuMobileStatus }">
           <div class="navbar-end h-100">
             <div
               v-for="voice in computedMenuVoices"
               :key="voice.id"
-              class="navbar-item mx-1 has-text-weight-medium pointer">
-              <n-link @click.native="SET_MENU_MOBILE_STATUS(false)" :to="`/${voice.title.toLowerCase()}`">
+              class="navbar-item mx-1 has-text-weight-medium pointer"
+              :class="{ 'has-dropdown is-hoverable is-relative' : voice.childs.length }">
+              <n-link
+                :class="{ 'navbar-link' : voice.childs.length }"
+                @click.native="SET_MENU_MOBILE_STATUS(false)"
+                :event="voice.childs.length ? '' : 'click'"
+                :to="`/${voice.slug}`">
                 {{ voice.title }}
               </n-link>
+
+              <div v-if="voice.childs.length" class="navbar-dropdown">
+                <n-link
+                  v-for="child in voice.childs"
+                  :key="child.ID"
+                  class="navbar-item"
+                  @click.native="SET_MENU_MOBILE_STATUS(false)"
+                  :to="`/${voice.slug}/${child.slug}`">
+                  {{ child.title }}
+                </n-link>
+              </div>
             </div>
           </div>
         </div>
@@ -53,13 +68,27 @@
     },
     computed: {
       ...mapGetters('application', ['getMenu', 'getMenuMobileStatus']),
+      /**
+       * @name computedMenuVoices
+       * @description Assuming that the father always comes first
+       * if the 'menu_item_parent' is not 0 so we have a child.
+       */
       computedMenuVoices() {
-        return this.getMenu.map(
-          (voice, index) => ({
-            id: voice.id || index,
-            title: voice.title || EMPTY_VALUE
-          })
-        )
+        return this.getMenu.length
+          ? this.getMenu.reduce(
+            (acc, curr, index) => {
+              const itemId = parseInt(curr.menu_item_parent, 10)
+              const fatherIndex = itemId === 0 ? index : 0
+
+              if (itemId === 0) {
+                acc.push({ ...curr, childs: [] })
+              } else {
+                acc[fatherIndex] && acc[fatherIndex].childs.push(curr)
+              }
+
+              return acc
+            }, [])
+          : []
       }
     },
     /**
@@ -93,7 +122,7 @@
       &.has-text-weight-medium {
         .nuxt-link-active,
         &:hover {
-          &:after {
+          &:before {
             content: '';
             position: absolute;
             bottom: 0;

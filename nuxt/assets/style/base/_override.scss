@@ -1,0 +1,15 @@
+
+.image {
+  &.is-256x256 {
+    img {
+      width: 256px;
+      height: 256px;
+    }
+  }
+}
+
+.navbar-link {
+  &:not(.is-arrowless)::after {
+    border-color: $ted-red;
+  }
+}

@@ -4,8 +4,6 @@
     <section class="section">
       <div class="container">
         <div v-html="getPageBySlugFromVUEX('homepage').content.rendered"></div>
-        <Announcer :year="getCurrentEdition" />
-        <SpeakersGrid :year="getCurrentEdition" />
       </div>
     </section>
     <BottomMatrix :matrix="matrix" />
@@ -20,9 +18,7 @@ export default {
   mixins:[axiosManager],
   components: {
     Hero: () => import('@/components/common/Hero'),
-    Announcer: () => import('@/components/Announcer'),
     BottomMatrix: () => import('@/components/BottomMatrix'),
-    SpeakersGrid: () => import('@/components/common/SpeakersGrid/index'),
   },
   computed: {
     ...mapGetters('application', ['getCurrentEdition', 'getPageBySlugFromVUEX']),
