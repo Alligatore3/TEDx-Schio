@@ -1,11 +1,6 @@
 <template>
   <div v-if="getPageBySlugFromVUEX('homepage')">
     <Hero :image="homepageACFMetaBy('full_width_image')" />
-    <section class="section">
-      <div class="container">
-        <div v-html="getPageBySlugFromVUEX('homepage').content.rendered"></div>
-      </div>
-    </section>
     <BottomMatrix :matrix="matrix" />
   </div>
 </template>
