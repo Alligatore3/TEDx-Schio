@@ -94,4 +94,4 @@ sw.*
 # WP
 wordpress/**/*
 !wordpress/wp-content/themes/
-!wordpress/wp-content/themes/**/*
+!wordpress/wp-content/themes/custom
