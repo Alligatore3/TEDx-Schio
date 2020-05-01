@@ -17,3 +17,18 @@ export const arrayAsFatherChilds = straightArray => straightArray.reduce(
 
     return acc
   }, [])
+
+export const straightPaths = arrayFatherChilds => arrayFatherChilds.reduce(
+  (acc, curr) => {
+    if(curr.childs.length) {
+      const paths = curr.childs.map(
+        child => `/${curr.slug}/${child.slug}`
+      )
+
+      acc = acc.concat(paths)
+    } else {
+      acc.push(`/${curr.slug}`)
+    }
+
+    return acc
+  }, [])
