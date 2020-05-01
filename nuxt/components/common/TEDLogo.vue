@@ -1,6 +1,6 @@
 <template>
   <n-link @click.native="SET_MENU_MOBILE_STATUS(false)" to="/">
-    <svg id="SVG_Logo" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 876.1 259.28">
+    <svg id="SVG_Logo" class="w-100" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 876.1 259.28">
       <title>Logo TEDxSchio</title>
       <path class="cls-1" d="M53,202.6,45.4,191.69h7.21l4,6,4-6h7l-7.57,10.77,8.5,12.24H61.38l-4.81-7.25-4.81,7.25H44.69Z"/>
       <path :style="computedStyle" d="M98.54,201.08H76.06v-4.76H98.54Zm0,9.53H76.06v-4.77H98.54Z"/>
@@ -67,7 +67,6 @@
 
 <style lang="scss" scoped>
   #SVG_Logo {
-    width: 200px;
     height: auto;
 
     .cls-1 {

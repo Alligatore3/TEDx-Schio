@@ -6,15 +6,6 @@
           <div class="columns is-multiline is-vcentered">
             <div class="column mb-2-mobile">
               <TEDLogo color="#fff"/>
-              <p class="mt-1 has-text-left ted-white">
-                Trame | Associazione per Tedx Schio | C.F. 94020440247
-              </p>
-              <p class="has-text-left ted-white">
-                Sede legale: Viale Roma, 55 36015 Schio
-              </p>
-              <p class="has-text-left ted-white">
-                Email: <a class="ted-white" href="mailto:tedxschio@gmail.com">tedxschio@gmail.com</a>
-              </p>
             </div>
             <div class="column mb-2-mobile">
               <div class="columns is-mobile h-100 is-vcentered">
@@ -31,9 +22,25 @@
               </div>
             </div>
             <div class="column">
-              <p class="has-text-right has-text-left-mobile ted-white">
+              <p class="mt-1 has-text-left ted-white">
+                Trame | Associazione per Tedx Schio | C.F. 94020440247
+              </p>
+              <p class="has-text-left ted-white">
+                Sede legale: Viale Roma, 55 36015 Schio
+              </p>
+              <p class="has-text-left ted-white">
+                Email: <a class="ted-white" href="mailto:tedxschio@gmail.com">tedxschio@gmail.com</a>
+              </p>
+            </div>
+          </div>
+          <div class="divider w-100 my-2"></div>
+          <div class="columns">
+            <div class="column">
+              <p class="has-text-left has-text-left-mobile ted-white">
                 © TEDxSchio.
               </p>
+            </div>
+            <div class="column">
               <p class="has-text-right has-text-left-mobile ted-white">
                 This independent TEDx event is operated under license from TED.
               </p>
@@ -85,6 +92,11 @@
 </script>
 
 <style lang="scss" scoped>
+  .divider {
+    display: block;
+    height: 2px;
+    background-color: $ted-light-grey;
+  }
   .arrow-top {
     border-radius: 100%;
     background-color: $ted-white;

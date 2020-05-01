@@ -4,6 +4,12 @@
   }
 }
 
+#SVG_Logo {
+  @media all and (max-width: 767px) {
+    width: 75% !important;
+  }
+}
+
 .mobile-menu {
   @media all and (max-width: 1023px) {
     background-color: $ted-white;
