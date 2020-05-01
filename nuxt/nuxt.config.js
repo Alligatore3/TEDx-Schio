@@ -1,5 +1,5 @@
 import { ENVs } from './constants'
-import { generateConfig } from "./generate/script";
+import { generateConfig } from "./generate";
 
 export default {
   /**

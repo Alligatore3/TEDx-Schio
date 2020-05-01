@@ -49,7 +49,8 @@
 </template>
 
 <script>
-  import { EMPTY_VALUE } from '@/constants'
+  import { arrayAsFatherChilds } from '@/generate/utilities'
+
   import { mapGetters, mapMutations } from 'vuex'
   import axiosManager from "@/mixins/axiosManager";
 
@@ -91,20 +92,7 @@
        */
       computedMenuVoices() {
         return this.getMenu.length
-          ? this.getMenu.reduce(
-            (acc, curr, index) => {
-              const itemId = parseInt(curr.menu_item_parent, 10)
-              const fatherIndex = itemId === 0 ? index : 0
-
-              if (itemId === 0) {
-                acc.push({ ...curr, childs: [] })
-              } else {
-                acc[fatherIndex] && acc[fatherIndex].childs.push(curr)
-              }
-
-              return acc
-            }, [])
-          : []
+          ? arrayAsFatherChilds(this.getMenu) : []
       }
     },
     /**
