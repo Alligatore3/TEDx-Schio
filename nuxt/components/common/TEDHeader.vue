@@ -35,7 +35,7 @@
                 <a
                   v-for="child in voice.childs"
                   :key="child.ID"
-                  class="navbar-item"
+                  class="navbar-item w-100 p-5px"
                   @click="menuVoiceClick(voice, child.slug)">
                   {{ child.title }}
                 </a>
