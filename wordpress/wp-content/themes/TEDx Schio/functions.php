@@ -42,8 +42,8 @@ add_action( 'rest_api_init', function () {
  */
 add_theme_support( 'post-thumbnails' );
 
-include_once('custom/post-types.php');
-include_once('custom/categories.php');
+include_once('customs/post-types.php');
+include_once('customs/categories.php');
 
 /**
  * @description Enable CORS on JSON API Wordpress.
