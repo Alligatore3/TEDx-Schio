@@ -18,6 +18,11 @@ export const arrayAsFatherChilds = straightArray => straightArray.reduce(
     return acc
   }, [])
 
+/**
+ * @description Given an array from upper fn (so father/childs)
+ * @param arrayFatherChilds
+ * @return {Array} Array with only paths as string (of course)
+ */
 export const straightPaths = arrayFatherChilds => arrayFatherChilds.reduce(
   (acc, curr) => {
     if(curr.childs.length) {

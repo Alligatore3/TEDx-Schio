@@ -1,6 +1,6 @@
 <template>
   <div v-if="getPageBySlugFromVUEX('homepage')">
-    <Hero :image="homepageACFMetaBy('full_width_image')" />
+    <SVGHero title="TEDx Schio" />
     <BottomMatrix :matrix="matrix" />
   </div>
 </template>
@@ -12,7 +12,7 @@
 export default {
   mixins:[axiosManager],
   components: {
-    Hero: () => import('@/components/common/Hero'),
+    SVGHero: () => import('@/components/common/SVGHero'),
     BottomMatrix: () => import('@/components/BottomMatrix'),
   },
   computed: {
