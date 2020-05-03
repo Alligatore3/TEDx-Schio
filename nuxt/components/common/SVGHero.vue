@@ -105,35 +105,18 @@
        * @see https://stackoverflow.com/a/1637014
        */
       setTitleAlignment() {
-        const { width, height } = this.$refs['the-title'].getBBox()
-        console.log(this.$refs['SVG_container'].clientHeight)
+        const { height } = this.$refs['the-title'].getBBox()
         this.yCoord = ((this.$refs['SVG_container'].clientHeight / 2) + (height / 2) - 10)
       }
     }
   }
-  //
-  //
-
-  //   const SVGContainer = jQuery('#svg-singularity');
-  //
-  //   const menuHeight = jQuery('#wrapper-navbar') && jQuery('#wrapper-navbar').innerHeight();
-  //   const footerHeight = jQuery('#wrapper-footer') && jQuery('#wrapper-footer').innerHeight();
-  //   /**
-  //    * @function
-  //    * @name setSVGContainerHeight
-  //    * @description Setting SVG Height due to center-align text.
-  //    */
-  //   const setSVGContainerHeight = () => SVGContainer.css('height', `${window.innerHeight - menuHeight - footerHeight}px`);
-  //
-  //   setSVGContainerHeight();
-  //   window.addEventListener("resize", setSVGContainerHeight);
-  // });
 </script>
 
 <style lang="scss" scoped>
   .SVG_container {
     .the-title {
       font-size: 5rem;
+      text-transform: capitalize;
 
       @media all and (max-width: 768px) {
         font-size: 2rem;
