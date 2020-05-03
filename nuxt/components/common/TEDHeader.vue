@@ -1,7 +1,7 @@
 <template>
   <div class="is-relative">
     <ButtonSpinner v-if="!computedMenuVoices.length" />
-    <nav v-else class="navbar is-fixed-top py-1" role="navigation" aria-label="main navigation">
+    <nav v-else class="navbar py-1" role="navigation" aria-label="main navigation">
       <div class="container">
         <div class="navbar-brand">
           <TEDLogo color="#000"/>
@@ -66,7 +66,7 @@
       ...mapMutations('application', ['SET_MENU_MOBILE_STATUS']),
       classObject(childs) {
         return {
-          'is-active': this.dropdownActive,
+          'is-active': childs.length && this.dropdownActive,
           'has-dropdown is-relative': childs.length
         }
       },

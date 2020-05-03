@@ -8,8 +8,21 @@
   }
 }
 
-.navbar-link {
-  &:not(.is-arrowless)::after {
-    border-color: $ted-red;
+.navbar {
+  a {
+    color: $ted-dark-black;
+    &:focus-within,
+    &:focus {
+      color: $ted-red;
+    }
+
+    &:hover {
+      color: $ted-dark-black;
+    }
+  }
+  .navbar-link {
+    &:not(.is-arrowless)::after {
+      border-color: $ted-red;
+    }
   }
 }

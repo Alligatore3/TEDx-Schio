@@ -1,27 +1,31 @@
 <template>
   <div>
-    <div ref="header">
-      <TEDHeader />
-    </div>
-    <div :style="swapHeight" class="swap-prevent margin-fallback">
+    <TEDHeader />
+    <div :style="swapStyles" class="swap-prevent">
       <nuxt v-if="getMenu.length" />
     </div>
-    <div ref="footer">
-      <TEDFooter />
-    </div>
+    <TEDFooter />
   </div>
 </template>
 
 <script>
   import { mapGetters } from 'vuex'
   export default {
-    data: () => ({ swapHeight:{ 'min-height': 'auto' } }),
+    data: () => ({
+      swapStyles: { 'min-height': 'auto' }
+    }),
     components: {
       TEDHeader: () => import('@/components/common/TEDHeader'),
       TEDFooter: () => import('@/components/common/TEDFooter'),
     },
     computed: {
       ...mapGetters('application', ['getMenu'])
+    },
+    mounted() {
+      window.addEventListener('resize', this.setSwapStyles, false)
+    },
+    destroyed(){
+      window.removeEventListener('resize', this.setSwapStyles)
     },
     methods: {
       /**
@@ -30,15 +34,20 @@
        * @see https://vuejs.org/v2/guide/components-edge-cases.html#Accessing-Child-Component-Instances-amp-Child-Elements
        * @return {Void}
        */
-      setSwapHeight() {
-        const sum = `${ this.$refs.header.clientHeight + this.$refs.footer.clientHeight }px`
+      setSwapStyles() {
+        const header = document.querySelector('nav.navbar')
+        const footer = document.getElementById('footerContainer')
+        const headerHeight = header ? header.clientHeight : 0
+        const footerHeight = footer ? footer.clientHeight : 0
 
-        this.swapHeight = { 'min-height': `calc(100vh - ${sum})` }
+        this.swapStyles = {
+          'min-height': `calc(100vh - ${ headerHeight + footerHeight }px)`,
+        }
       }
     },
     watch: {
       '$route': function() {
-        return this.setSwapHeight()
+        return this.setSwapStyles()
       }
     }
   }

@@ -1,12 +1,18 @@
 <template>
-  <section class="SVG_container section">
-    <svg class="w-h-100" ref="svg-down">
+  <section ref="SVG_container" class="SVG_container is-relative section is-medium red-bg over-hidden">
+    <svg class="w-h-100 svg-down" ref="svg-down">
       <rect width="100%" height="100%" :fill="TEDxRed"/>
-      <rect width="100%" height="100%" fill="transparent"/>
-      <text ref="the-title" class="the-title">{{ title }}</text>
+      <text
+        fill="white"
+        ref="the-title"
+        x="10%"
+        :y="yCoord"
+        class="the-title">
+        {{ title }}
+      </text>
     </svg>
 
-    <svg class="w-h-100" ref="svg-up">
+    <svg class="w-h-100 svg-up" ref="svg-up">
       <defs>
         <clipPath id="mask" ref="mask">
           <circle id="mask-circle" ref="mask-circle" cx="50%" cy="50%" r="8%" style="fill: #ffffff"/>
@@ -14,7 +20,13 @@
       </defs>
       <g clip-path="url(#mask)">
         <rect width="100%" height="100%" fill="white"/>
-        <text :fill="TEDxRed" class="the-title">{{ title }}</text>
+        <text
+          x="10%"
+          :y="yCoord"
+          :fill="TEDxRed"
+          class="the-title">
+          {{ title }}
+        </text>
       </g>
       <circle id="circle-shadow" cx="50%" cy="50%" r="8%" style="fill: transparent;" />
     </svg>
@@ -32,15 +44,31 @@
         default: ""
       }
     },
-    data: () => ({ svgPoint: null, TEDxRed }),
+    data: () => ({
+      yCoord: 0,
+      navHeight: document.querySelector('nav.navbar').clientHeight,
+      svgPoint: null,
+      TEDxRed
+    }),
+    /**
+     * @description Move your mouse/finger over the image.
+     * @author Noel Delgado | @pixelia_me
+     * {@link https://codepen.io/noeldelgado/pen/ByxQjL}
+     */
     mounted() {
       this.svgPoint = this.$refs['svg-down'].createSVGPoint()
-      const meda = this.$refs['the-title'].getBBox();
-      console.log(meda)
+      this.setTitleAlignment()
 
       window.addEventListener('mousemove', this.mousemoveHandler, false);
       document.addEventListener('touchmove', this.touchmoveHandler, false);
       window.addEventListener('click', this.clickHandler, false);
+      window.addEventListener('resize', this.setTitleAlignment, false);
+    },
+    destroyed() {
+      window.removeEventListener('mousemove', this.mousemoveHandler);
+      document.removeEventListener('touchmove', this.touchmoveHandler);
+      window.removeEventListener('click', this.clickHandler);
+      window.removeEventListener('resize', this.setTitleAlignment);
     },
     methods: {
       cursorPoint(e, svg) {
@@ -66,25 +94,28 @@
       },
       clickHandler(event) {
         const circle = this.$refs['mask-circle'].cloneNode();
+
         circle.setAttributeNS(null, 'cx', event.clientX);
-        circle.setAttributeNS(null, 'cy', event.clientY);
+        circle.setAttributeNS(null, 'cy', event.clientY - this.navHeight);
         this.$refs['mask'].appendChild(circle);
+      },
+      /**
+       * @description SVG get text element width
+       * half height PLUS because it's baseline.
+       * @see https://stackoverflow.com/a/1637014
+       */
+      setTitleAlignment() {
+        const { width, height } = this.$refs['the-title'].getBBox()
+        console.log(this.$refs['SVG_container'].clientHeight)
+        this.yCoord = ((this.$refs['SVG_container'].clientHeight / 2) + (height / 2) - 10)
       }
     }
   }
   //
   //
-  // /**
-  //    * @function
-  //    * @description Move your mouse/finger over the image.
-  //    * @author Noel Delgado | @pixelia_me
-  //    * {@link https://codepen.io/noeldelgado/pen/ByxQjL}
-  //    */
+
   //   const SVGContainer = jQuery('#svg-singularity');
   //
-  //   const is_homepage = () => svgElement && maskedElement && svgMask && SVGContainer.length;
-  //
-  //   if (!is_homepage()) return;
   //   const menuHeight = jQuery('#wrapper-navbar') && jQuery('#wrapper-navbar').innerHeight();
   //   const footerHeight = jQuery('#wrapper-footer') && jQuery('#wrapper-footer').innerHeight();
   //   /**
@@ -92,7 +123,6 @@
   //    * @name setSVGContainerHeight
   //    * @description Setting SVG Height due to center-align text.
   //    */
-  //
   //   const setSVGContainerHeight = () => SVGContainer.css('height', `${window.innerHeight - menuHeight - footerHeight}px`);
   //
   //   setSVGContainerHeight();
@@ -100,8 +130,20 @@
   // });
 </script>
 
-<style scoped>
-.the-title {
-  font-size: 3rem;
-}
+<style lang="scss" scoped>
+  .SVG_container {
+    .the-title {
+      font-size: 5rem;
+
+      @media all and (max-width: 768px) {
+        font-size: 2rem;
+      }
+    }
+    .svg-down,
+    .svg-up {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
 </style>

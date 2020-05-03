@@ -1,5 +1,5 @@
 <template>
-  <div class="section black-bg">
+  <div id="footerContainer" class="section black-bg">
     <div class="container">
       <footer class="footer transparent-bg">
         <div class="content">
