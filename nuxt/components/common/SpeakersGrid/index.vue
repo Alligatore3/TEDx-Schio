@@ -1,7 +1,7 @@
 <template>
   <div>
     <ButtonSpinner v-if="!speakersFromVUEX" />
-    <div v-else class="speakers">
+    <div v-else id="speakers">
       <h1 class="title is-2 ted-red has-text-centered my-3">
         Gli Speaker di TEDxSchio {{ year }}
       </h1>

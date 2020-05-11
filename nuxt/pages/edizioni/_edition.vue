@@ -5,6 +5,16 @@
       <Hero :image="pageMetadata.image" />
       <section class="section">
         <div class="container">
+          <div class="buttons is-centered">
+            <button class="button red-bg is-relative">
+              <a class="w-100 ted-white has-text-weight-medium" href="#speakers">
+                Speakers
+              </a>
+            </button>
+            <button class="button red-bg is-relative">
+              <a class="w-100 ted-white has-text-weight-medium" href="#partners">Partners</a>
+            </button>
+          </div>
           <PageContentHTML :html="pageMetadata.body" />
           <Announcer :year="currentEditionFromURLInt" />
           <SpeakersGrid :year="currentEditionFromURLInt" />
@@ -62,3 +72,12 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  .buttons {
+    button {
+      width: 48%;
+      border: 2px solid #f63614
+    }
+  }
+</style>

@@ -1,14 +1,14 @@
 <template>
-  <div :class="{'sub-container mx-auto' : size === 'is-medium'}">
-    <section class="hero" :class="size">
-      <div class="hero-body is-relative over-hidden">
-        <img v-if="image" class="hero-image" :src="image" alt="Banner Image" />
-        <h1 class="title float is-capitalized ted-red">
-          {{ title }}
-        </h1>
-      </div>
-    </section>
-  </div>
+  <section
+    class="hero is-large"
+    :class="{'has-bg-img' : image}"
+    :style="{ backgroundImage: 'url(' + image + ')' }">
+    <div class="hero-body is-relative over-hidden">
+      <h1 class="title float is-capitalized ted-red">
+        {{ title }}
+      </h1>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -32,17 +32,13 @@
 </script>
 
 <style lang="scss" scoped>
-  .sub-container {
-    max-width: 80%;
-  }
-
-  .hero-image {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 20;
+  /*
+    Thanks to https://github.com/jgthms/bulma/issues/1007#issuecomment-320096294
+  */
+  .has-bg-img {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 
   .float {
