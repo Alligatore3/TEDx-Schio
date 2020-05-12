@@ -1,6 +1,6 @@
 <template>
   <section
-    class="hero is-large"
+    class="hero is-large extra-p-mobile"
     :class="{'has-bg-img' : image}"
     :style="{ backgroundImage: 'url(' + image + ')' }">
     <div class="hero-body is-relative over-hidden">

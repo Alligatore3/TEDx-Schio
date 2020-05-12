@@ -1,5 +1,5 @@
 <template>
-  <section ref="SVG_container" class="SVG_container is-relative section is-medium red-bg over-hidden">
+  <section ref="SVG_container" class="SVG_container is-relative section is-medium red-bg over-hidden extra-p-mobile">
     <svg class="w-h-100 svg-down" ref="svg-down">
       <rect width="100%" height="100%" :fill="TEDxRed"/>
       <text

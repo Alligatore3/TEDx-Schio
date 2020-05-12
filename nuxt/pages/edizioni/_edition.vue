@@ -76,7 +76,7 @@
 <style lang="scss" scoped>
   .buttons {
     button {
-      width: 48%;
+      width: 40%;
       border: 2px solid #f63614
     }
   }
