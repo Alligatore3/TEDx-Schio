@@ -17,9 +17,9 @@ export const arrayAsFatherChilds = straightArray => straightArray.reduce((accumu
       (!accumulator[parentIndex].sub_menu) && (accumulator[parentIndex].sub_menu = [])
       accumulator[parentIndex].sub_menu.push(current)
     }
-
-    return accumulator
   }
+
+  return accumulator
 }, [])
 
 /**
