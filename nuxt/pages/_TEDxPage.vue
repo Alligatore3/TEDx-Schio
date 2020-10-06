@@ -18,6 +18,7 @@
     name: "TEDxPage",
     mixins: [axiosManager],
     components: {
+      TEDxCircles: () => import('@/components/TEDxCircles'),
       ButtonSpinner: () => import('@/components/common/ButtonSpinner'),
       SpeakersGrid: () => import('@/components/common/SpeakersGrid/index'),
       PartnersGrid: () => import('@/components/common/PartnersGrid/index'),
@@ -27,7 +28,7 @@
     computed: {
       ...mapGetters('application', ['getPages', 'getCurrentEdition', 'getPageBySlugFromVUEX']),
       pageInURL() {
-          return this.$route.params && this.$route.params.TEDxPage
+        return this.$route.params && this.$route.params.TEDxPage
       },
       /**
        * @description To pass props dynamically, you can add the v-bind directive to your
@@ -36,11 +37,15 @@
        * @return {Array}
        */
       dynamicComponents() {
-        switch (this.pageInURL) {
-          case 'contatti':
-            const html = this.getPageBySlugFromVUEX(this.pageInURL) &&
-              this.getPageBySlugFromVUEX(this.pageInURL).content.rendered || ''
+        const html = this.getPageBySlugFromVUEX(this.pageInURL) &&
+          this.getPageBySlugFromVUEX(this.pageInURL).content.rendered || '';
 
+        switch (this.pageInURL) {
+          case 'circles':
+            return [
+              { instance: 'TEDxCircles', props: { html } }
+            ]
+          case 'contatti':
             return [
               { instance: 'SVGHero', props: { title: this.pageInURL } },
               { instance: 'PageContentHTML', props: { html } }
