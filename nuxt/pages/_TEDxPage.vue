@@ -43,7 +43,7 @@
         switch (this.pageInURL) {
           case 'circles':
             return [
-              { instance: 'TEDxCircles', props: { html } }
+              { instance: 'TEDxCircles', props: { page: this.getPageBySlugFromVUEX(this.pageInURL) } }
             ]
           case 'contatti':
             return [
