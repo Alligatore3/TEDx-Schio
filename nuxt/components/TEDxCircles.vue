@@ -2,8 +2,18 @@
   <div class="container">
     <div v-html="html" />
     <img class="my-2" :src="image.source_url" :alt="image.alt_text" />
-    <h4 class="my-1" v-html="when" />
-    <h4 v-html="where" />
+    <div class="mb-2" v-html="what" />
+    <h4 class="mb-2" v-html="when" />
+    <h4 class="mb-2" v-html="where" />
+    <div class="mb-2" v-html="how" />
+    <a
+      class="has-text-centered is-size-2 is-block my-2 ted-red"
+      :href="page.acf.gform"
+      alt="Iscrivit al TED Circle"
+      target="_blank"
+      rel="nofollow">
+      Iscriviti al TED Circle
+    </a>
   </div>
 </template>
 
@@ -59,7 +69,17 @@
             ${where}
           </span>
         `
-      }
+      },
+      what() {
+        const { acf } = this.page
+
+        return acf && acf.what
+      },
+      how() {
+        const { acf } = this.page
+
+        return acf && acf.how
+      },
     }
   }
 </script>
