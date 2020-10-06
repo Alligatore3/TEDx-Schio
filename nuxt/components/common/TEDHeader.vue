@@ -24,16 +24,16 @@
               v-for="voice in computedMenuVoices"
               :key="voice.id"
               class="navbar-item mx-1 has-text-weight-medium pointer"
-              :class="classObject(voice.childs)">
+              :class="classObject(voice.sub_menu)">
               <a
-                :class="{ 'navbar-link' : voice.childs.length }"
+                :class="{ 'navbar-link' : voice.sub_menu.length }"
                 @click="menuVoiceClick(voice)">
                 {{ voice.title }}
               </a>
 
-              <div v-if="voice.childs.length" class="navbar-dropdown">
+              <div v-if="voice.sub_menu.length" class="navbar-dropdown">
                 <a
-                  v-for="child in voice.childs"
+                  v-for="child in voice.sub_menu"
                   :key="child.ID"
                   class="navbar-item w-100 p-5px"
                   @click="menuVoiceClick(voice, child.slug)">
@@ -72,7 +72,7 @@
       },
       menuVoiceClick(menuVoice, childSlug) {
         this.SET_MENU_MOBILE_STATUS(false)
-        const hasChilds = Boolean(menuVoice.childs.length)
+        const hasChilds = Boolean(menuVoice.sub_menu.length)
         const path = childSlug ? `/${menuVoice.slug}/${childSlug}` : `/${menuVoice.slug}`
 
         if(hasChilds && !childSlug) {
