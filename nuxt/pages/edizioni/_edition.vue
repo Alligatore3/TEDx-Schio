@@ -58,7 +58,7 @@
           content: { rendered: body },
           _embedded: { 'wp:featuredmedia': medias }
         } = this.getPageBySlugFromVUEX(this.currentEditionFromURL)
-        const image = medias[0] && medias[0].source_url
+        const image = medias && medias[0] && medias[0].source_url
 
         return { body, image }
       }
