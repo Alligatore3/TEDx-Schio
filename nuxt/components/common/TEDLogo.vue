@@ -67,6 +67,7 @@
 
 <style lang="scss" scoped>
   #SVG_Logo {
+    max-width: 280px;
     height: auto;
 
     .cls-1 {
