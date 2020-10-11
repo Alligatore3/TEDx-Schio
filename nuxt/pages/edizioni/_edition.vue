@@ -7,12 +7,14 @@
         <div class="container">
           <div class="buttons is-centered">
             <button class="button red-bg is-relative">
-              <a class="w-100 ted-white has-text-weight-medium" href="#speakers">
+              <n-link class="w-100 ted-white has-text-weight-medium" to="#speakers">
                 Speakers
-              </a>
+              </n-link>
             </button>
             <button class="button red-bg is-relative">
-              <a class="w-100 ted-white has-text-weight-medium" href="#partners">Partners</a>
+              <n-link class="w-100 ted-white has-text-weight-medium" to="#partners">
+                Partners
+              </n-link>
             </button>
           </div>
           <PageContentHTML :html="pageMetadata.body" />
