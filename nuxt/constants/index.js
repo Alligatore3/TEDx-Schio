@@ -12,7 +12,7 @@ const ENVs = {
   },
   production: {
     protocol: 'https',
-    host: 'develop.tedxschio.com',
+    host: 'tedxschio.com',
     port: false,
     basePath: '/',
     path_API: 'wordpress/wp-json/wp/v2',
