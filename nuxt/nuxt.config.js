@@ -29,7 +29,7 @@ export default {
 
       { hid: 'og:title', name: 'og:title', content: ENVs.SEO.title },
       { hid: 'og:description', name: 'og:description', content: ENVs.SEO.description },
-      { hid: 'og:url', name: 'og:url', content: ENVs.getFullPath() },
+      { hid: 'og:url', name: 'og:url', content: ENVs.getFullBasePath() },
 
       { hid: 'twitter:title', name: 'twitter:title', content: ENVs.SEO.title },
       { hid: 'twitter:description', name: 'twitter:description', content: ENVs.SEO.description },
