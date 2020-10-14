@@ -4,6 +4,13 @@
   }
 }
 
+.px-2-mobile {
+  @media all and (max-width: 1023px) {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
 #SVG_Logo {
   @media all and (max-width: 767px) {
     width: 75% !important;

@@ -1,13 +1,13 @@
 <template>
-  <div class="container">
+  <div class="container px-2-mobile">
     <div v-html="html" />
-    <img class="my-2" :src="image.source_url" :alt="image.alt_text" />
-    <div class="mb-2" v-html="what" />
-    <h4 class="mb-2" v-html="when" />
-    <h4 class="mb-2" v-html="where" />
-    <div class="mb-2" v-html="how" />
+    <img class="my-4" :src="image.source_url" :alt="image.alt_text" />
+    <div class="mb-5" v-html="what" />
+    <h4 class="mb-5" v-html="when" />
+    <h4 class="mb-5" v-html="where" />
+    <div class="mb-5" v-html="how" />
     <a
-      class="has-text-centered is-size-2 is-block my-2 ted-red"
+      class="has-text-centered is-size-2 is-block my-2 ted-red is-size-3-mobile	"
       :href="page.acf.gform"
       alt="Iscrivit al TED Circle"
       target="_blank"
@@ -51,7 +51,7 @@
 
         return `
           <span class="has-text-weight-bold">
-            Quando ?
+            Quando?
           </span>
           <span class="is-capitalized">
             ${dateTimeFormat.format(this.dateObject)}, ${hours}:${minutes}
@@ -63,7 +63,7 @@
 
         return `
           <span class="has-text-weight-bold">
-            Dove ?
+            Dove?
           </span>
           <span class="is-capitalized">
             ${where}
