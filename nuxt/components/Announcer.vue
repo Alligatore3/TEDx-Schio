@@ -1,5 +1,5 @@
 <template>
-  <div class="is-relative my-6">
+  <div class="is-relative mt-9 mb-6">
     <ButtonSpinner v-if="!getAnnouncerByYearFromVUEX(year)" />
     <SubjectBlock v-else :subject="computedAnnouncer" />
   </div>

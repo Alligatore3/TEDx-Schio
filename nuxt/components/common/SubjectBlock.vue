@@ -1,6 +1,6 @@
 <template>
   <div class="my-3">
-    <h3 class="title is-3 ted-red has-text-centered">
+    <h3 class="title is-3 ted-red has-text-centered is-size-4-mobile">
       {{ subject.title }}
     </h3>
     <h5 v-if="subject.subtitle" class="subtitle has-text-weight-medium ted-red mt-2	is-5">

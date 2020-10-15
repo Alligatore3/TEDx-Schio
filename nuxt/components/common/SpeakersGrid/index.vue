@@ -1,8 +1,8 @@
 <template>
   <div>
     <ButtonSpinner v-if="!speakersFromVUEX" />
-    <div v-else id="speakers" class="my-6">
-      <h1 class="title is-2 ted-red has-text-centered my-3">
+    <div v-else id="speakers" class="mt-9 mb-6">
+      <h1 class="title is-2 ted-red has-text-centered mb-6 is-size-4-mobile">
         Gli Speaker di TEDxSchio {{ year }}
       </h1>
       <div class="columns is-tablet is-multiline">

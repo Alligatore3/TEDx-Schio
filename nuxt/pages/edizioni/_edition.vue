@@ -5,7 +5,7 @@
       <Hero :image="pageMetadata.image" />
       <section class="section">
         <div class="container">
-          <div class="buttons is-centered">
+          <div class="buttons is-centered mt-6 mb-9">
             <button class="button red-bg is-relative">
               <n-link class="w-100 ted-white has-text-weight-medium" to="#speakers">
                 Speakers

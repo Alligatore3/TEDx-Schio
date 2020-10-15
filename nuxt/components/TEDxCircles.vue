@@ -7,7 +7,7 @@
     <h4 class="mb-5" v-html="where" />
     <div class="mb-5" v-html="how" />
     <a
-      class="has-text-centered is-size-2 is-block my-2 ted-red is-size-3-mobile	"
+      class="has-text-centered is-size-2 is-block my-6 ted-red is-size-3-mobile	"
       :href="page.acf.gform"
       alt="Iscrivit al TED Circle"
       target="_blank"

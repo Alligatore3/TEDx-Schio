@@ -3,7 +3,7 @@
     <div class="title has-text-centered is-relative">
       <span class="subtitle is-6">{{ title }}</span>
     </div>
-    <div class="columns my-2 is-tablet is-multiline is-centered is-vcentered">
+    <div class="columns my-6 is-tablet is-multiline is-centered is-vcentered">
       <div
         v-for="partner in partners"
         :key="partner.id"
