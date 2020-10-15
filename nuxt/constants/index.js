@@ -5,7 +5,7 @@ const ENVs = {
     title: 'TEDx Schio',
     description: 'Schio rappresenta da sempre un centro industriale e culturale di notevole spessore e occupa una posizione di forte rilievo all’interno del contesto sociale del territorio.'
   },
-  isDevelopment: true,
+  isDevelopment: false,
   production: {
     protocol: 'https',
     host: 'tedxschio.com',
