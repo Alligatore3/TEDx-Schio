@@ -87,5 +87,17 @@ export default {
         this.errorHandlerHelper(e)
       }
     },
+    /**
+     * @todo
+     * @returns {Promise<void>}
+     */
+    async AXIOS_getCirclesEvents() {
+      try {
+        return (await this.$axios.$get(`${ ENVs.getFullAPIPath() }/circle-events`))
+      }
+      catch (e) {
+        this.errorHandlerHelper(e)
+      }
+    }
   }
 }

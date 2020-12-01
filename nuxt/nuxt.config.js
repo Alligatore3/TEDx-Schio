@@ -48,6 +48,7 @@ export default {
   css: [
     '@/assets/style/styles.scss',
   ],
+  plugins: [ '@/plugins/fakeI18N' ],
   /**
    * @description Share variables, mixins, functions across all style files (no @import needed)
    * @see https://github.com/nuxt-community/style-resources-module#setup
