@@ -13,6 +13,6 @@ Vue.filter('fakeI18N', acfKey => {
 
     default:
       console.warn('Missing i18n, LOL')
-      return;
+      return acfKey
   }
 })

@@ -1,22 +1,25 @@
 <template>
-  <div v-if="events.length" class="container px-2-mobile">
-    <CircleEventTemplate class="my-6" :event="formattedEvents.imminent" />
-    <div v-html="circlesPage.body" />
-    <div class="has-text-centered">
-      <img
-        class="my-6 max-w-half mx-auto"
-        :src="circlesPage.thumbnail.source_url"
-        :alt="circlesPage.thumbnail.alt_text" />
-    </div>
+  <div>
+    <ButtonSpinner v-if="!events.length" />
+    <div v-else class="container px-2-mobile">
+      <CircleEventTemplate class="my-6" :event="formattedEvents.imminent" />
+      <div v-html="circlesPage.body" />
+      <div class="has-text-centered">
+        <img
+          class="my-6 max-w-half mx-auto"
+          :src="circlesPage.thumbnail.source_url"
+          :alt="circlesPage.thumbnail.alt_text" />
+      </div>
 
-    <p class="has-text-weight-bold is-size-5 is-uppercase mb-3">
-      Edizioni passate:
-    </p>
-    <CircleEventTemplate
-      class="mb-6"
-      v-for="(event, index) in formattedEvents.pasted"
-      :key="index"
-      :event="event" />
+      <p class="has-text-weight-bold is-size-5 is-uppercase mb-3">
+        Edizioni passate:
+      </p>
+      <CircleEventTemplate
+        class="mb-6"
+        v-for="(event, index) in formattedEvents.pasted"
+        :key="index"
+        :event="event" />
+    </div>
   </div>
 </template>
 
@@ -30,7 +33,8 @@
       events: []
     }),
     components: {
-      CircleEventTemplate: () => import('@/components/CircleEventTemplate')
+      CircleEventTemplate: () => import('@/components/CircleEventTemplate'),
+      ButtonSpinner: () => import('@/components/common/ButtonSpinner'),
     },
     async mounted() {
       this.events = await this.AXIOS_getCirclesEvents()

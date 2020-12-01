@@ -4,7 +4,7 @@
       {{ event.title }}
     </h2>
     <div class="mt-3 mb-5" v-html="event.content" />
-    <div :key="field" v-for="field in Object.keys(event.acf)" class="mb-3">
+    <div :key="field" v-for="field in getAcfKeys(event.acf)" class="mb-3">
       <div class="columns">
         <div class="has-text-weight-semibold is-capitalized column">
           {{ field | fakeI18N }}
@@ -12,16 +12,28 @@
         <div v-html="event.acf[field]" class="column grow-8"/>
       </div>
     </div>
+    <LiveStreaming :embed="event.acf.live_stream" />
   </div>
 </template>
 
 <script>
 export default {
   name: "CircleEventTemplate",
+  components: {
+    LiveStreaming: () => import('@/components/LiveStreaming')
+  },
   props: {
     event: {
       type: Object,
       default: () => ({})
+    }
+  },
+  methods: {
+    // Keep as clean as possible.
+    getAcfKeys(obj) {
+      return Object.keys(obj).filter(
+        k => k !== 'live_stream'
+      )
     }
   },
   computed: {
