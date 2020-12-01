@@ -1,5 +1,5 @@
 <template>
-  <div class="my-6">
+  <div>
     <h2 class="has-text-weight-semibold is-size-5">
       {{ event.title }}
     </h2>
@@ -23,6 +23,29 @@ export default {
       type: Object,
       default: () => ({})
     }
+  },
+  computed: {
+    // when() {
+    //   const { acf: { when } } = this.page
+    //   const dateObject = when && new Date(when)
+    //
+    //   const hours = dateObject.getHours()
+    //   const minutes = dateObject.getMinutes()
+    //   const dayOfWeek = dateObject.toLocaleString('it-IT', {  weekday: 'long' })
+    //   // @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/format
+    //   const dateTimeFormat = dayOfWeek && new Intl.DateTimeFormat('it-IT',
+    //     { weekday: 'long', month: 'long', day: 'numeric' }
+    //   );
+    //
+    //   return `
+    //       <span class="has-text-weight-bold">
+    //         Quando?
+    //       </span>
+    //       <span class="is-capitalized">
+    //         ${dateTimeFormat.format(dateObject)}, ${hours}:${minutes}
+    //       </span>
+    //     `
+    // },
   }
 }
 </script>
