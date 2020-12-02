@@ -5,12 +5,7 @@
     </h2>
     <div class="mt-3 mb-5" v-html="event.content" />
     <div :key="field" v-for="field in getAcfKeys(event.acf)" class="mb-3">
-      <div class="columns">
-        <div class="has-text-weight-semibold is-capitalized column">
-          {{ field | fakeI18N }}
-        </div>
-        <div v-html="event.acf[field]" class="column grow-8"/>
-      </div>
+      <div v-html="elaboratedHTML(event, field)"></div>
     </div>
     <LiveStreaming :embed="event.acf.live_stream" />
   </div>
@@ -34,6 +29,16 @@ export default {
       return Object.keys(obj).filter(
         k => k !== 'live_stream'
       )
+    },
+    elaboratedHTML(event, key) {
+      return `
+        <span class="has-text-weight-semibold is-capitalized" >
+            ${ this.$fakeI18N(key) }
+        </span>
+        <span>
+            ${ event.acf[key] }
+        </span>
+      `
     }
   },
   computed: {
