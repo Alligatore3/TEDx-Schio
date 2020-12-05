@@ -4,8 +4,8 @@
       {{ event.title }}
     </h2>
     <div class="mt-3 mb-5" v-html="event.content" />
-    <div :key="field" v-for="field in getAcfKeys(event.acf)" class="mb-3">
-      <div v-html="elaboratedHTML(event, field)"></div>
+    <div :key="field.key" v-for="field in ACFFields" class="mb-3">
+      <div v-html="elaboratedHTML(field)"></div>
     </div>
     <LiveStreaming :embed="event.acf.live_stream" />
   </div>
@@ -24,45 +24,41 @@ export default {
     }
   },
   methods: {
-    // Keep as clean as possible.
-    getAcfKeys(obj) {
-      return Object.keys(obj).filter(
-        k => k !== 'live_stream'
-      )
+    /**
+     * @name formatACFDate
+     * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/format
+     * @returns {string}
+     */
+    formatACFDate(when) {
+      const dateObject = when && new Date(when)
+      const hours = dateObject.getHours()
+      const minutes = dateObject.getMinutes()
+      const dayOfWeek = dateObject.toLocaleString('it-IT', {  weekday: 'long' })
+      const dateTimeFormat = dayOfWeek && new Intl.DateTimeFormat('it-IT',
+        { weekday: 'long', month: 'long', day: 'numeric' }
+      );
+
+      return `${dateTimeFormat.format(dateObject)}, ${hours}:${minutes}`
     },
-    elaboratedHTML(event, key) {
+    elaboratedHTML({ key, value }) {
       return `
         <span class="has-text-weight-semibold is-capitalized" >
             ${ this.$fakeI18N(key) }
         </span>
-        <span>
-            ${ event.acf[key] }
-        </span>
+        <span> ${ value } </span>
       `
     }
   },
   computed: {
-    // when() {
-    //   const { acf: { when } } = this.page
-    //   const dateObject = when && new Date(when)
-    //
-    //   const hours = dateObject.getHours()
-    //   const minutes = dateObject.getMinutes()
-    //   const dayOfWeek = dateObject.toLocaleString('it-IT', {  weekday: 'long' })
-    //   // @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/format
-    //   const dateTimeFormat = dayOfWeek && new Intl.DateTimeFormat('it-IT',
-    //     { weekday: 'long', month: 'long', day: 'numeric' }
-    //   );
-    //
-    //   return `
-    //       <span class="has-text-weight-bold">
-    //         Quando?
-    //       </span>
-    //       <span class="is-capitalized">
-    //         ${dateTimeFormat.format(dateObject)}, ${hours}:${minutes}
-    //       </span>
-    //     `
-    // },
+    ACFFields() {
+      return Object.keys(this.event.acf).reduce(
+        (acc, curr) => {
+          if(curr === 'live_stream') return acc // Skipping live
+
+          const value = (curr === 'when') ? this.formatACFDate(this.event.acf[curr]) : this.event.acf[curr]
+          return (acc.push({ key: curr, value })) && acc
+        }, [])
+    }
   }
 }
 </script>
