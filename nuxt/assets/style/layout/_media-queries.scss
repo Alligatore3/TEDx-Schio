@@ -58,3 +58,9 @@
     padding-bottom: 6rem !important;
   }
 }
+
+.md_max-w-half {
+  @media all and (min-width: 1024px) {
+    max-width: 50%;
+  }
+}
