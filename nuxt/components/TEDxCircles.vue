@@ -12,7 +12,7 @@
       </div>
 
       <p class="has-text-weight-bold is-size-5 is-uppercase mb-3">
-        Edizioni passate:
+        Edizioni passate
       </p>
       <CircleEventTemplate
         class="mb-6"
